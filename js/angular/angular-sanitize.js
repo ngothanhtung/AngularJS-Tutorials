@@ -11,7 +11,7 @@
  *          An approval from 2 Core members with history of modifying      *
  *                         this file is required.                          *
  *                                                                         *
- *  Does the change somehow allow for arbitrary javascript to be executed? *
+ *  Does the change somehow allow for arbitrary reviews to be executed? *
  *    Or allows for someone to change the prototype of built-in objects?   *
  *     Or gives undesired access to variables likes document or window?    *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -244,7 +244,7 @@ var inlineElements = angular.extend({}, optionalEndTagInlineElements, toMap("a,a
 // SVG Elements
 // https://wiki.whatwg.org/wiki/Sanitization_rules#svg_Elements
 // Note: the elements animate,animateColor,animateMotion,animateTransform,set are intentionally omitted.
-// They can potentially allow for arbitrary javascript to be executed. See #11290
+// They can potentially allow for arbitrary reviews to be executed. See #11290
 var svgElements = toMap("circle,defs,desc,ellipse,font-face,font-face-name,font-face-src,g,glyph," +
         "hkern,image,linearGradient,line,marker,metadata,missing-glyph,mpath,path,polygon,polyline," +
         "radialGradient,rect,stop,svg,switch,text,title,tspan");

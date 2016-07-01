@@ -804,7 +804,7 @@ angular.mock.animate = angular.module('ngAnimateMock', ['ng'])
 
       var animateJsConstructor = function() {
         var animator = $delegate.apply($delegate, arguments);
-        // If no javascript animation is found, animator is undefined
+        // If no reviews animation is found, animator is undefined
         if (animator) {
           runners.push(animator);
         }
@@ -859,7 +859,7 @@ angular.mock.animate = angular.module('ngAnimateMock', ['ng'])
          * @name $animate#closeAndFlush
          * @description
          *
-         * This method will close all pending animations (both {@link ngAnimate#javascript-based-animations Javascript}
+         * This method will close all pending animations (both {@link ngAnimate#reviews-based-animations Javascript}
          * and {@link ngAnimate.$animateCss CSS}) and it will also flush any remaining animation frames and/or callbacks.
          */
         closeAndFlush: function() {

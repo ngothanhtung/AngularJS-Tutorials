@@ -7,7 +7,6 @@
 <body>
 
 <div ng-app="myApp" ng-controller="myController">
-
     First Name: <input type="text" ng-model="firstName"><br>
     Last Name: <input type="text" ng-model="lastName"><br>
     <br>
@@ -16,7 +15,10 @@
 
 <script src="../js/angular/angular.js"></script>
 <script>
+
+    // Create a Module
     var app = angular.module('myApp', []);
+    // Adding a Controller
     app.controller('myController', function ($scope) {
         $scope.firstName = "Tom";
         $scope.lastName = "Cruise";

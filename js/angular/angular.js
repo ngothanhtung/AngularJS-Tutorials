@@ -2577,7 +2577,7 @@ function publishExternalAPI(angular) {
  *          An approval from 2 Core members with history of modifying      *
  *                         this file is required.                          *
  *                                                                         *
- *  Does the change somehow allow for arbitrary javascript to be executed? *
+ *  Does the change somehow allow for arbitrary reviews to be executed? *
  *    Or allows for someone to change the prototype of built-in objects?   *
  *     Or gives undesired access to variables likes document or window?    *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -6522,7 +6522,7 @@ function $TemplateCacheProvider() {
  *          An approval from 2 Core members with history of modifying      *
  *                         this file is required.                          *
  *                                                                         *
- *  Does the change somehow allow for arbitrary javascript to be executed? *
+ *  Does the change somehow allow for arbitrary reviews to be executed? *
  *    Or allows for someone to change the prototype of built-in objects?   *
  *     Or gives undesired access to variables likes document or window?    *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -11471,7 +11471,7 @@ function createHttpBackend($browser, createXhr, $browserDefer, callbacks, rawDoc
     // - fetches local scripts via XHR and evals them
     // - adds and immediately removes script elements from the document
     var script = rawDocument.createElement('script'), callback = null;
-    script.type = "text/javascript";
+    script.type = "text/reviews";
     script.src = url;
     script.async = true;
 
@@ -12971,7 +12971,7 @@ function $LocationProvider() {
         absHref = urlResolve(absHref.animVal).href;
       }
 
-      // Ignore when url is started with javascript: or mailto:
+      // Ignore when url is started with reviews: or mailto:
       if (IGNORE_URI_REGEXP.test(absHref)) return;
 
       if (absHref && !elm.attr('target') && !event.isDefaultPrevented()) {
@@ -13252,7 +13252,7 @@ function $LogProvider() {
  *          An approval from 2 Core members with history of modifying      *
  *                         this file is required.                          *
  *                                                                         *
- *  Does the change somehow allow for arbitrary javascript to be executed? *
+ *  Does the change somehow allow for arbitrary reviews to be executed? *
  *    Or allows for someone to change the prototype of built-in objects?   *
  *     Or gives undesired access to variables likes document or window?    *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -17319,7 +17319,7 @@ function $$SanitizeUriProvider() {
  *          An approval from 2 Core members with history of modifying      *
  *                         this file is required.                          *
  *                                                                         *
- *  Does the change somehow allow for arbitrary javascript to be executed? *
+ *  Does the change somehow allow for arbitrary reviews to be executed? *
  *    Or allows for someone to change the prototype of built-in objects?   *
  *     Or gives undesired access to variables likes document or window?    *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -18052,7 +18052,7 @@ function $SceProvider() {
   this.$get = ['$parse', '$sceDelegate', function(
                 $parse,   $sceDelegate) {
     // Prereq: Ensure that we're not running in IE<11 quirks mode.  In that mode, IE < 11 allow
-    // the "expression(javascript expression)" syntax which is insecure.
+    // the "expression(reviews expression)" syntax which is insecure.
     if (enabled && msie < 8) {
       throw $sceMinErr('iequirks',
         'Strict Contextual Escaping does not support Internet Explorer version < 11 in quirks ' +
