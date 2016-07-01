@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myController">
+    <h1 ng-bind="name"></h1>
+    <h4> {{ name }}</h4>
+    <input type="text" ng-model="name">
+</div>
+
+<script src="../js/angular/angular.js"></script>
+<script>
+    var app = angular.module("myApp", []);
+    app.controller("myController", function ($scope) {
+        $scope.name = "Aptech";
+    });
+</script>
+</body>
+</html>

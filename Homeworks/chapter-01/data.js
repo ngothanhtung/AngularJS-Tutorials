@@ -10,10 +10,16 @@ products.push({
     color: 'green, yellow, red',
     stock: 10,
     description: '',
-    moreImages: [{
+    moreImages: [
+    {
         caption: '',
         imageUrl: ''
-    }]
+    },
+    {
+        caption: '',
+        imageUrl: ''
+    },
+    ]
 });
 
 products.push({
