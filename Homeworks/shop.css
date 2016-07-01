@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: #454545;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    line-height: 21px;
+    position: relative;
+    background: #fff;
+}
+
+.product {
+    display: block;
+    height: auto;
+    border: 1px solid #dddddd;
+    min-height: 200px;
+    text-align: center;
+}
+
+h4 a {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+    color: #3a3a3a;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.description {
+    margin: 0 auto;
+    min-height: 107px;
+    max-width: 235px;
+}
+
+.description p {
+    color: #888888;
+    font-size: 14px;
+    min-height: 55px;
+    max-height: 90px;
+    overflow: hidden;
+    line-height: 18px;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.action-control {
+    border: 0;
+    display: block;
+    height: auto;
+    padding: 5px 0 15px;
+    width: 100%;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #454545;
+}
+
