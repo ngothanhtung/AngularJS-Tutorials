@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SHOP</title>
+    <link href="../../css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
+    <link href="shop.css" rel="stylesheet" type="text/css">
+
+</head>
+<body ng-app="myApp" ng-controller="myController">
+
+<div class="container">
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-md-6">
+            <img ng-src="{{ product.imageUrl }}" class="img img-responsive"/>
+        </div>
+        <div class="col-md-6">
+            <div class="product-details">
+                <div class="description">
+                    <h4 class="product-name">
+                        <a href="detail.html?id={{ product.id }}">
+                            {{ product.name }}
+                        </a>
+                    </h4>
+                    <p>
+                        {{ product.summary }}
+                    </p>
+                    <span class="size">{{ product.size }}</span>
+                </div>
+                <div class="price">
+                    <span>$ {{ product.price }}</span>
+                </div>
+                <div class="action-control"><a class="btn btn-primary"> <span class="add2cart">
+                    <i class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="shop.js"></script>
+<script src="data.js"></script>
+<script src="../../js/angular/angular.js"></script>
+<script>
+
+
+    var app = angular.module("myApp", []);
+
+    app.controller("myController", function ($scope) {
+        var id = getParameterByName("id");
+        products.forEach(function (item, index) {
+            if (id == item.id) {
+                $scope.product = item;
+                console.log(item);
+                return false;
+            }
+        });
+    })
+</script>
+</body>
+</html>
