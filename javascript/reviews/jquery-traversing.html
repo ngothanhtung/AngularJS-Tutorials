@@ -12,6 +12,8 @@
         </h3>
     </div>
 </section>
+
+
 <br><br><br>
 <section id="descendants" style="padding: 30px; border: 1px solid aqua; width: 500px;">
     <div style="padding: 30px; border: 1px solid red;">
@@ -37,8 +39,8 @@
         $("#span-ancestors").parent().css({"background-color": "yellow"});
 
         // returns all ancestor elements of the selected element
-        //$("span").parents().css({"background-color": "green"});
-        $("#span-ancestors").parents("div").css({"background-color": "green"});
+        $("#span-ancestors").parents().css({"background-color": "green"});
+        //$("#span-ancestors").parents("div").css({"background-color": "green"});
 
         // returns all ancestor elements between two given arguments.
         $("#span-ancestors").parentsUntil("#ancestors").css({"background-color": "violet"});
