@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Routing Example</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+</head>
+<body ng-app="myApp">
+
+<div class="container" style="margin-top: 20px;">
+
+    <div class="btn-group" role="group" aria-label="...">
+        <a class="btn btn-primary" href="#main">Main</a>
+        <a class="btn btn-primary" href="#red">Red</a>
+        <a class="btn btn-primary" href="#green">Green</a>
+        <a class="btn btn-primary" href="#blue">Blue</a>
+    </div>
+    <div style="margin-top: 20px;" ng-view>
+    </div>
+</div>
+<script src="../js/angular/angular.js"></script>
+<script src="../js/angular/angular-route.js"></script>
+<script>
+    var app = angular.module("myApp", ["ngRoute"]);
+    app.config(function ($routeProvider) {
+        $routeProvider
+                .when("/main", {
+                    templateUrl: "views/main.html",
+                    controller: "mainController"
+                })
+                .when("/red", {
+                    templateUrl: "views/red.html",
+                    controller: "redController"
+                })
+                .when("/green", {
+                    templateUrl: "views/green.html",
+                    controller: "greenController"
+                })
+                .when("/blue", {
+                    templateUrl: "views/blue.html",
+                    controller: "blueController"
+                })
+                .otherwise({redirectTo: '/main'});
+    });
+
+    app.controller("mainController", function ($scope) {
+        $scope.message = "I love photograph";
+    });
+
+    app.controller("redController", function ($scope) {
+        $scope.message = "I love tree";
+    });
+
+    app.controller("greenController", function ($scope) {
+        $scope.message = "I love nature";
+    });
+
+    app.controller("blueController", function ($scope) {
+        $scope.message = "I love building";
+    });
+</script>
+</body>
+</html>

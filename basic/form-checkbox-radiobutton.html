@@ -14,9 +14,21 @@
 
     <form>
         Pick a topic:
-        <input type="radio" ng-model="selectedValue" value="dogs">Dogs
-        <input type="radio" ng-model="selectedValue" value="tuts">Tutorials
-        <input type="radio" ng-model="selectedValue" value="cars">Cars
+        <div class="radio">
+            <label>
+                <input type="radio" ng-model="selectedValue" value="dogs">Dogs
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" ng-model="selectedValue" value="tuts">Tutorials
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" ng-model="selectedValue" value="cars">Cars
+            </label>
+        </div>
     </form>
 
 
