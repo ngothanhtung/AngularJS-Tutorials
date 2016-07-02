@@ -65,7 +65,7 @@
         // JSON
         $http.get("http://www.w3schools.com/angular/customers.php")
                 .then(function (response) {
-                    $scope.customers = response.data;
+                    $scope.customers = response.data.records;
                 });
 
         /*
