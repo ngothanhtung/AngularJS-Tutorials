@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+</head>
+
+<body>
+<div class="container">
+    <h2>AngularJS Ajax</h2>
+    <div ng-app="myApp" ng-controller="myController">
+        <h1>Songs from JSON</h1>
+        <p><input class="form-control" type="text" ng-model="searchText"></p>
+        <table class="table table-bordered table-hover">
+            <tr ng-repeat="song in songs | filter : searchText">
+                <td style="width: 1%">
+                    {{ song.Id }}
+                </td>
+                <td>
+                    {{ song.Title }}
+                </td>
+                <td>
+                    {{ song.Lyric }}
+                </td>
+                <td style="width: 1%; white-space: nowrap">
+                    {{ song.Source }}
+                </td>
+            </tr>
+        </table>
+
+        </ul>
+    </div>
+</div>
+<script src="../js/angular/angular.js"></script>
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myController', function ($scope, $http) {
+        // JSON
+        $http.get("karaoke.json").then(function (response) {
+            $scope.songs = response.data;
+        });
+    });
+</script>
+
+</body>
