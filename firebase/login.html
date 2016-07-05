@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Firebase - Login</title>
+    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+<div class="container">
+    <div>
+        <div class="form-group">
+            <label for="email">Email: </label>
+            <input id="email" ng-model="email" type="email" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="password">Password: </label>
+            <input id="password" type="password" ng-model="password" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-block btn-primary" ng-click="login();">Login</button>
+        </div>
+    </div>
+</div>
+<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/angular/angular.js"></script>
+
+
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myController', function ($scope) {
+        $scope.email = "";
+        $scope.password = "";
+
+        $scope.login = function () {
+            if (firebase.auth().currentUser) {
+                // [START signout]
+                firebase.auth().signOut();
+                // [END signout]
+            } else {
+                var email = $scope.email;
+                var password = $scope.password;
+                if (email.length < 4) {
+                    alert('Please enter an email address.');
+                    return;
+                }
+                if (password.length < 4) {
+                    alert('Please enter a password.');
+                    return;
+                }
+                // Sign in with email and pass.
+                // [START authwithemail]
+                firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // [START_EXCLUDE]
+                    if (errorCode === 'auth/wrong-password') {
+                        alert('Wrong password.');
+                    } else {
+                        alert(errorMessage);
+                    }
+                    console.log(error);
+                    // [END_EXCLUDE]
+                });
+                // [END authwithemail]
+            }
+        }
+    });
+
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyB9sUy-Ui4MhaN-GxACFKZrsUZzClcsaa4",
+        authDomain: "fir-example-83f8b.firebaseapp.com",
+        databaseURL: "https://fir-example-83f8b.firebaseio.com",
+        storageBucket: "fir-example-83f8b.appspot.com",
+    };
+    firebase.initializeApp(config);
+
+    // Listen for auth state changes
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            window.location = "index.html";
+        } else {
+
+        }
+    });
+
+</script>
+</body>
+</html>

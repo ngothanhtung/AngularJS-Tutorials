@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Firebase - Examples</title>
+    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container" ng-app="myApp" ng-controller="myController">
+    <div>
+        <div class="form-group">
+            <label for="name">Name: </label>
+            <input id="name" ng-model="name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="price">Price: </label>
+            <input id="price" type="number" ng-model="price" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="stock">Stock: </label>
+            <input id="stock" type="number" ng-model="stock" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="discount">Discount: </label>
+            <input id="discount" type="number" ng-model="discount" class="form-control">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-block btn-primary" ng-click="post();">Submit</button>
+        </div>
+    </div>
+    <hr/>
+    <table class="table">
+        <tr ng-repeat="p in products">
+            <td>
+                {{ p.id }}
+            </td>
+            <td>
+                {{ p.name }}
+            </td>
+            <td>
+                <input ng-model="p.price" ng-change="products.$save(p)" class="form-control"/>
+                <!-- {{ p.price | currency}} -->
+            </td>
+            <td>
+                {{ p.stock | number }}
+            </td>
+            <td>
+                {{ p.discount | number }}
+            </td>
+        </tr>
+    </table>
+</div>
+<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/angular/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.0.1/angularfire.min.js"></script>
+
+<script>
+
+
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyB9sUy-Ui4MhaN-GxACFKZrsUZzClcsaa4",
+        authDomain: "fir-example-83f8b.firebaseapp.com",
+        databaseURL: "https://fir-example-83f8b.firebaseio.com",
+        storageBucket: "fir-example-83f8b.appspot.com",
+    };
+    firebase.initializeApp(config);
+
+    // Listen for auth state changes
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            console.log("Authenticated");
+        } else {
+            window.location = "login.html";
+            console.log("Not Authenticated");
+        }
+    });
+
+    function writeNewProduct(name, price, stock, discount) {
+        var userId = firebase.auth().currentUser.uid;
+
+        // A product entry.
+        var product = {
+            uid: userId,
+            name: name,
+            price: price,
+            stock: stock,
+            discount: discount,
+        };
+
+        // Get a key for a new product.
+        var key = firebase.database().ref().child('products').push().key;
+
+        var updates = {};
+        updates['/products/' + key] = product;
+        return firebase.database().ref().update(updates, onComplete);
+    }
+
+    function onComplete(error) {
+        if (error) {
+            console.log('Synchronization failed');
+        } else {
+            console.log('Synchronization succeeded');
+        }
+    }
+
+    var app = angular.module('myApp', ["firebase"]);
+    app.controller('myController', function ($scope, $firebaseArray) {
+        $scope.discount = 0;
+        $scope.stock = 0;
+
+
+        // [START recent_posts_query]
+        var ref = firebase.database().ref('products').limitToLast(100);
+        // [END recent_posts_query]
+
+
+        // download the data into a local object
+        //$scope.products = $firebaseObject(ref);
+
+
+        $scope.products = $firebaseArray(ref);
+
+        $scope.post = function () {
+            writeNewProduct($scope.name, $scope.price, $scope.stock, $scope.discount);
+        };
+    });
+</script>
+</body>
+</html>
