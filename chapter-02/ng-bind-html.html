@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-bind-html</title>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myController">
+    <p ng-bind-html="html"></p>
+</div>
+
+<!--
+The ng-bind-html directive is a secure way of binding content to an HTML element.
+
+When you are letting AngularJS write HTML in your application,
+you should check the HTML for dangerous code.
+
+By including the "angular-santize.js" module in your application
+you can do so by running the HTML code through the ngSanitize function.
+-->
+
+<script type="text/javascript" src="../js/angular/angular.js"></script>
+<script type="text/javascript" src="../js/angular/angular-sanitize.js"></script>
+<script>
+    var app = angular.module("myApp", ['ngSanitize']);
+    app.controller("myController", function ($scope) {
+        $scope.html = "My name is: <h1>PETER JACKSON</h1>"
+    });
+</script>
+
+</body>
+</html>

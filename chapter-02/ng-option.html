@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-options</title>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myController">
+    <select ng-model="selectedName" ng-options="item for item in names"></select>
+
+    <select ng-options="item as item.label for item in cars track by item.id" ng-model="selectedCar"></select>
+
+    <select ng-options="p as p.label for p in providers track by p.label" ng-model="selectedProvider"></select>
+
+
+    <h1>{{ selectedProvider.label }}</h1>
+</div>
+
+<script type="text/javascript" src="../js/angular/angular.js"></script>
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myController', function ($scope) {
+        $scope.names = ["Emil", "Tobias", "Linus"];
+
+        $scope.cars = [{
+            id: 1,
+            label: 'Toyota'
+        }, {
+            id: 2,
+            label: 'Honda'
+        }];
+
+        $scope.providers = [{
+            id: 1,
+            label: 'SamSung'
+
+        }, {
+            id: 2,
+            label: 'Apple'
+        }];
+
+        $scope.selectedName = $scope.names[0];
+        $scope.selectedCar = $scope.cars[0];
+        $scope.selectedProvider = $scope.providers[0];
+
+    });
+</script>
+
+</body>
+</html>

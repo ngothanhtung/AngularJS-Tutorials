@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-class</title>
+    <style>
+        .sky {
+            color: black;
+            background-color: lightblue;
+            padding: 40px;
+            font-family: "Courier New";
+        }
+
+        .ocean {
+            background-color: blue;
+            color: white;
+            padding: 40px;
+            font-family: "Verdana";
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+<select ng-model="home">
+    <option value="sky">Sky</option>
+    <option value="ocean">Ocean</option>
+</select>
+<hr/>
+<div ng-class="home">
+    <h1>Welcome Home!</h1>
+    <p>I like it!</p>
+</div>
+
+<script type="text/javascript" src="../js/angular/angular.js"></script>
+<script>
+    var app = angular.module("myApp", []);
+    app.controller("myController", function ($scope) {
+        $scope.home = "sky";
+    });
+</script>
+
+</body>
+</html>

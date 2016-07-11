@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-selected</title>
+</head>
+
+<body ng-app="">
+Click here to select BMW as your favorite car:
+<input type="checkbox" ng-model="mySelected">
+<p>My Favourite car:</p>
+
+<br>
+<select>
+    <option>Volvo</option>
+    <option ng-selected="mySelected">BMW</option>
+    <option>Ford</option>
+</select>
+<script type="text/javascript" src="../js/angular/angular.js"></script>
+</body>
+</html>

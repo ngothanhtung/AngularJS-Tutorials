@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-list</title>
+</head>
+
+<body ng-app="">
+<p>Write some names in the input field, use a comma to separate them:</p>
+
+<input ng-model="customers" ng-list/>
+
+<p>When the ng-list directive is included, your input is converted into an array, one item for each name:</p>
+
+<pre>{{customers}}</pre>
+
+<script type="text/javascript" src="../js/angular/angular.js"></script>
+</body>
+</html>

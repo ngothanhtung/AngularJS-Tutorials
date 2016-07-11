@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-class-even & ng-class-odd</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <style>
+        .even-row {
+            background-color: #1ab394;
+            color: black;
+        }
+
+        .odd-row {
+            background-color: #1f90d8;
+            color: black;
+        }
+    </style>
+</head>
+<!-- ng-app directive -->
+<body ng-app="myApp">
+<div class="container" ng-controller="myController">
+    <h2>Table</h2>
+    <!-- ng-repeat directive -->
+    <table class="table">
+        <tr ng-repeat="country in countries" ng-class-odd="'odd-row'" ng-class-even="'even-row'">
+            <td>{{ country.name }}</td>
+            <td>{{ country.locale }}</td>
+        </tr>
+    </table>
+</div>
+
+<script type="text/javascript" src="../js/angular/angular.js"></script>
+<script>
+    var app = angular.module("myApp", []);
+    app.controller("myController", function ($scope) {
+        // Khai báo mảng
+        $scope.countries = [
+            {locale: 'en-US', name: 'United States'},
+            {locale: 'en-GB', name: 'United Kingdom'},
+            {locale: 'en-FR', name: 'France'},
+            {locale: 'vi-VN', name: 'Vietnam'}
+        ];
+    });
+</script>
+</body>
+</html>

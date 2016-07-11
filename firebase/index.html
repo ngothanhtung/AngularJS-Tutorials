@@ -34,26 +34,35 @@
         </div>
     </div>
     <hr/>
-    <table class="table">
-        <tr ng-repeat="p in products">
-            <td>
-                {{ p.id }}
-            </td>
-            <td>
-                {{ p.name }}
-            </td>
-            <td>
-                <input ng-model="p.price" ng-change="products.$save(p)" class="form-control"/>
-                <!-- {{ p.price | currency}} -->
-            </td>
-            <td>
-                {{ p.stock | number }}
-            </td>
-            <td>
-                {{ p.discount | number }}
-            </td>
-        </tr>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Discount</th>
+                <th></th>
+            </tr>
+            <tr ng-repeat="p in products">
+                <td>
+                    <input ng-model="p.name" class="form-control"/>
+                </td>
+                <td class="form-inline" style="width: 1%; white-space: nowrap; vertical-align: middle">
+                    <input ng-model="p.price" style="width: 100px" class="form-control text-right"/> $
+                </td>
+                <td class="form-inline" style="width: 1%; white-space: nowrap; vertical-align: middle">
+                    <input ng-model="p.stock" style="width: 80px" class="form-control text-right"/>
+                </td>
+                <td class="form-inline" style="width: 1%; white-space: nowrap; vertical-align: middle">
+                    <input ng-model="p.discount" style="width: 80px" class="form-control text-right"/> %
+                </td>
+                <td class="form-inline" style="width: 1%; white-space: nowrap; vertical-align: middle">
+                    <button title="Save" ng-click="products.$save(p)" class="btn btn-sm btn-primary">Save</button>
+                    <button title="Remove" ng-click="products.$remove(p)" class="btn btn-sm btn-danger">Remove</button>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
 <script src="../js/jquery.min.js"></script>
@@ -112,6 +121,7 @@
 
     var app = angular.module('myApp', ["firebase"]);
     app.controller('myController', function ($scope, $firebaseArray) {
+        $scope.index = 0;
         $scope.discount = 0;
         $scope.stock = 0;
 

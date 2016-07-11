@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-value</title>
+</head>
+
+<body ng-app="myApp" ng-controller="myController">
+
+<input ng-value="myVar" />
+<h1>
+    {{ myVar }}
+</h1>
+
+<p>This example shows how to use AngularJS expressions to set the value of an input field.</p>
+<script type="text/javascript" src="../js/angular/angular.js"></script>
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myController', function ($scope) {
+        $scope.myVar = "Hello World!";
+    });
+</script>
+</body>
+</html>

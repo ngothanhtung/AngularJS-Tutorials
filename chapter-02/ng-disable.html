@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-disable</title>
+</head>
+
+<body ng-app="">
+Click here to disable all the form fields:<input type="checkbox" ng-model="all"><br>
+<br>
+
+<input type="text" ng-disabled="all">
+<input type="radio" ng-disabled="all">
+<select ng-disabled="all">
+    <option>Female</option>
+    <option>Male</option>
+</select>
+
+<script type="text/javascript" src="../js/angular/angular.js"></script>
+</body>
+</html>

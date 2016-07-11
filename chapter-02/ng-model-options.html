@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-model-options</title>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="myController">
+    <!-- Supported by <input>, <select>, and <textarea> elements. -->
+    <p>Update the input field:</p>
+    <input ng-model="name" ng-model-options="{updateOn: 'blur'}">
+
+    <!-- specifies how many milliseconds to wait with the binding. -->
+    <input ng-model="name" ng-model-options="{debounce : 2000}">
+
+    <h1>{{name}}</h1>
+
+</div>
+
+<script type="text/javascript" src="../js/angular/angular.js"></script>
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myController', function ($scope) {
+        $scope.name = "Tom Cruise";
+    });
+</script>
+
+<p>This example shows how the ng-model-options directive can be used to hold the data-binding of the value of an input
+    field until the field loses focus.</p>
+</body>
+</html>
