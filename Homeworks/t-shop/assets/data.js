@@ -1,7 +1,9 @@
 var siteSetting = {
     siteName: "T-SHOP ONLINE",
     phone: "+84.905.157.803",
-    logoUrl: "images/logo.png"
+    email: "aptech@softech.edu.vn",
+    logoUrl: "images/logo.png",
+    copyright: "© APTECH 2016. All right reserved."
 };
 //-----------------------------------------------------------------------------
 var menuItems = [];

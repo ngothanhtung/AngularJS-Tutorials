@@ -36,7 +36,9 @@
 
 <div ng-include="'fixed-navigation-bar.html'"></div>
 
-<div style="margin-top: 90px"></div>
+<div ng-include="'banner.html'"></div>
+
+<div style="margin-top: 20px"></div>
 <div class="container">
     <div class="row xsResponse">
         <div ng-repeat="p in products" class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
@@ -73,6 +75,9 @@
         </div>
     </div>
 </div>
+
+<div ng-include="'footer.html'"></div>
+
 <script src="shop.js"></script>
 <script src="assets/data.js"></script>
 <script src="../../js/angular/angular.js"></script>
