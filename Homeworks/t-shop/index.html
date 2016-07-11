@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>T-SHOP</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Fav and touch icons -->
@@ -11,9 +9,10 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
     <link rel="shortcut icon" href="assets/ico/favicon.png">
-
+    <title>TSHOP - Bootstrap E-Commerce Parallax Theme</title>
     <!-- Bootstrap core CSS -->
     <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
 
@@ -25,6 +24,7 @@
     <![endif]-->
 
     <!-- include pace script for automatic web page progress bar  -->
+
     <script>
         paceOptions = {
             elements: true
@@ -38,18 +38,22 @@
 
 <div ng-include="'banner.html'"></div>
 
+<div ng-include="'main-container.html'"></div>
+
 <div style="margin-top: 20px"></div>
 <div class="container">
     <div class="row xsResponse">
         <div ng-repeat="p in products" class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
             <div class="product">
-                <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist" data-placement="left">
+                <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
+                   data-placement="left">
                     <i class="glyphicon glyphicon-heart"></i>
                 </a>
 
                 <div class="image">
                     <div class="quickview">
-                        <a data-toggle="modal" class="btn btn-xs btn-quickview" ng-href="ajax/product.html" data-target="#productSetailsModalAjax">Quick View </a>
+                        <a data-toggle="modal" class="btn btn-xs btn-quickview" ng-href="ajax/product.html"
+                           data-target="#productSetailsModalAjax">Quick View </a>
                     </div>
                     <a ng-href="details.html?id={{ p.id }}">
                         <img ng-src="{{ p.imageUrl }}" alt="img" class="img-responsive">
@@ -82,13 +86,23 @@
 <script src="assets/data.js"></script>
 <script src="../../js/angular/angular.js"></script>
 
+<script>
+    var app = angular.module("myApp", []);
+    app.controller("myController", function ($scope) {
+        $scope.products = products;
+        $scope.menuItems = menuItems;
+        $scope.siteSetting = siteSetting;
+    })
+</script>
+
+
 <!-- Le javascript
 ================================================== -->
 
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js">
-</script>
+<script src="assets/js/jquery/latest/jquery-latest.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
 <script>
     // this script required for subscribe modal
     $(window).load(function () {
@@ -98,6 +112,7 @@
     });
 
 </script>
+
 
 <!-- include jqueryCycle plugin -->
 <script src="assets/js/jquery.cycle2.min.js"></script>
@@ -136,13 +151,5 @@
 <script src="assets/js/script.js"></script>
 
 
-<script>
-    var app = angular.module("myApp", []);
-    app.controller("myController", function ($scope) {
-        $scope.products = products;
-        $scope.menuItems = menuItems;
-        $scope.siteSetting = siteSetting;
-    })
-</script>
 </body>
 </html>

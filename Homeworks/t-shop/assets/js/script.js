@@ -529,7 +529,6 @@ $(document).ready(function () {
     });
 
 
-
     // customs select by select2
 
     // $("select").minimalect(); // REMOVED with  selct2.min.js

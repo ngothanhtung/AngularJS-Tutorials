@@ -48,8 +48,7 @@ $(document).ready(function () {
     /*==================================
      Home Page Slider  || jQuery Cycle
      ====================================*/
-
-
+    
     $('.slider-v1').cycle({
         //Specify options
         fx: 'scrollHorz',
