@@ -36,9 +36,9 @@
 
 <div ng-include="'fixed-navigation-bar.html'"></div>
 
-<div ng-include="'banner.html'"></div>
+<div ng-include="'banner.html'" onload="bannerLoad()"></div>
 
-<div ng-include="'main-container.html'"></div>
+<div ng-include="'main-container.html'" onload="containerLoad()"></div>
 
 <div style="margin-top: 20px"></div>
 <div class="container">
@@ -87,11 +87,59 @@
 <script src="../../js/angular/angular.js"></script>
 
 <script>
+    function customPager() {
+        $.each(this.owl.userItems, function (i) {
+            var pagination1 = $('.owl-controls .owl-pagination > div:first-child');
+            var pagination = $('.owl-controls .owl-pagination');
+            $(pagination[i]).append("<div class=' owl-has-nav owl-next'><i class='fa fa-angle-right'></i>  </div>");
+            $(pagination1[i]).before("<div class=' owl-has-nav owl-prev'><i class='fa fa-angle-left'></i> </div>");
+        });
+    }
+
     var app = angular.module("myApp", []);
-    app.controller("myController", function ($scope) {
+    app.controller("myController", function ($rootScope, $scope) {
         $scope.products = products;
         $scope.menuItems = menuItems;
         $scope.siteSetting = siteSetting;
+
+        $rootScope.$on('$includeContentLoaded', function (event, url) {
+            if (url == 'banner.html') {
+                console.log("BANNER LOADED");
+                $('.slider-v1').cycle({
+                    //Specify options
+                    fx: 'scrollHorz',
+                    //Name of transition effect
+                    slides: '.slider-item',
+                    timeout: 5000,
+                    // set time for nex slide
+                    speed: 1200,
+                    easeIn: 'easeInOutExpo',
+                    // easing
+                    easeOut: 'easeInOutExpo',
+                    pager: '#pager2',
+                    //Selector for element to use as pager container
+                });
+            } else if (url == "main-container.html") {
+                var latestProductSlider = $("#productslider");
+                latestProductSlider.owlCarousel({
+                    navigation: false, // Show next and prev buttons
+                    items: 4,
+                    itemsTablet: [768, 2],
+                    afterInit: customPager,
+                    afterUpdate: customPager
+                });
+            }
+        });
+
+        // CALLBACK BANNER LOADED
+        $scope.bannerLoad = function () {
+
+        };
+
+        $scope.containerLoad = function () {
+
+        };
+
     })
 </script>
 

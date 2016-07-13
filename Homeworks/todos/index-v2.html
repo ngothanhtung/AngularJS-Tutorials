@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>TODO</title>
+    <!-- Description, Keywords and Author -->
+    <meta name="description" content="Your description">
+    <meta name="keywords" content="Your,Keywords">
+    <meta name="author" content="ResponsiveWebInc">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Styles -->
+    <!-- Bootstrap CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font awesome CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <!-- Main CSS -->
+    <link href="style.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="#">
+</head>
+
+<body ng-app="myApp" ng-controller="myController">
+
+<!-- UI - X Starts -->
+<div class="ui-todo">
+    <div class="container">
+
+        <!-- Main heading -->
+        <h2>Tasks</h2>
+
+        <div class="row">
+            <div ng-repeat="task in tasks" class="col-md-3 col-sm-6 col-xs-6 col-mob">
+                <!-- Item -->
+                <div class="ui-item">
+                    <!-- Heading -->
+                    <div class="ui-heading clearfix">
+                        <!-- Heading -->
+                        <h5><a href="#">{{ task.text }}</a></h5>
+                        <!-- Close Button -->
+                        <span><a href="#" class="ui-close">x</a></span>
+                    </div>
+                    <!-- Date -->
+                    <span> {{ task.date.toDateString() }} <a href="#" class="label label-sm label-red">{{ task.priority }}</a></span>
+                    <!-- Paragraph -->
+                    <p>{{ task.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- UI - X Ends -->
+
+<!-- Javascript files -->
+<!-- jQuery -->
+<script src="../../js/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="../../js/bootstrap.min.js"></script>
+<!-- Placeholder JS -->
+<script src="../../js/placeholder.js"></script>
+<!-- Respond JS for IE8 -->
+<script src="../../js/respond.min.js"></script>
+<!-- HTML5 Support for IE -->
+<script src="../../js/html5shiv.js"></script>
+<script>
+    <!-- Close Item -->
+    $(document).ready(function () {
+        $(".ui-item span > a.ui-close").click(function (e) {
+            e.preventDefault();
+            $(this).parents(".ui-item").fadeOut(300);		// On Click Fade Out
+        });
+    });
+
+</script>
+
+
+<script src="../../js/angular/angular.js"></script>
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myController', function ($scope) {
+        $scope.tasks = [{text: 'Clean House', date: new Date(), priority: "High", description: "Lau nha cho vo" ,done: false}];
+
+        $scope.todoAdd = function () {
+            $scope.todoList.push({todoText: $scope.todoInput, done: false});
+            $scope.todoInput = "";
+        };
+
+        $scope.remove = function () {
+            var oldList = $scope.todoList;
+            $scope.todoList = [];
+            angular.forEach(oldList, function (x) {
+                if (!x.done) $scope.todoList.push(x);
+            });
+        };
+    });
+</script>
+</body>
+</html>
