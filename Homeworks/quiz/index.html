@@ -45,7 +45,7 @@
         <div class="col-md-3">
             <h3>LEVEL: {{getCurrentClass()}}</h3>
             <div>
-                <button style="text-align: left" class="btn btn-block btn-default" ng-repeat="level in levels" ng-class="{ 'btn-danger': index +1 === level.index}">
+                <button style="text-align: left" class="btn btn-block btn-default" ng-repeat="level in levels" ng-class="{ 'btn-danger': index + 1 === level.index}">
                     {{ level.index }} - LEVEL: {{ level.level }} - MONEY: {{ level.money | number }}
                 </button>
             </div>
