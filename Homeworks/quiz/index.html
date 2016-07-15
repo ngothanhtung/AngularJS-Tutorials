@@ -3,8 +3,6 @@
     <meta charset="UTF-8">
     <title>QUIZ</title>
     <link href="../../css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
-
 </head>
 <html>
 
@@ -39,8 +37,11 @@
         </div>
     </div>
     <p>
-    <hr/>
+
     </p>
+    <div ng-show="gameover">
+        <h1>GAME OVER</h1>
+    </div>
     <p>
         SCORE: {{ score }}
     </p>
@@ -92,8 +93,15 @@
             }
 
             // NEXT QUESTION
+
             $scope.index++;
             $scope.currentQuestion = $scope.questions[$scope.index];
+
+            if ($scope.index >= $scope.questions.length) {
+                // GAME OVER
+                $scope.gameover = true;
+                $scope.index = $scope.questions.length - 1;
+            }
         };
     });
 </script>
