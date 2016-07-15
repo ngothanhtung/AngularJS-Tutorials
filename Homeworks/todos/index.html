@@ -4,52 +4,103 @@
     <title>TO DO</title>
     <link href="../../css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
+
+    <style>
+        .done {
+            color: blue;
+            font-weight: bold;
+        }
+
+        .doing {
+            color: black;
+        }
+    </style>
 </head>
 <html>
 
-<body class="container" ng-app="myApp" ng-controller="myController">
-
-<div class="page-header">
-    <h1>To Do List</h1>
-</div>
-
-<form class="panel" ng-submit="addTask()">
-    <div class="input-group">
-        <input type="text" ng-model="inputText" class="form-control" placeholder="Add new task">
-        <span class="input-group-btn">
-            <input type="submit" value="Add New" class="btn btn-primary">
-        </span>
+<body ng-app="myApp" ng-controller="myController">
+<div class="container">
+    <div class="page-header">
+        <h1>To Do List</h1>
     </div>
 
-</form>
-<hr/>
+    <form class="form-inline" role="form" ng-submit="addTask()">
+        <div class="form-group">
+            <input type="text" ng-model="inputText" style="min-width: 400px" class="form-control" placeholder="Add new task">
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Add New" class="btn btn-primary">
+        </div>
 
-<div ng-repeat="x in tasks" style="margin-bottom: 8px">
-    <input type="checkbox" ng-model="x.done" style="margin-right: 4px;">
-    <span ng-bind="x.text"></span>
+    </form>
+    <br>
+
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th class="hidden-xs">Id</th>
+            <th>Text</th>
+            <th>Date</th>
+            <th style="white-space: nowrap">Completed Date</th>
+            <th>Done</th>
+        </tr>
+        <tr ng-repeat="task in tasks track by task.id" ng-class="{done: task.done == true, doing: task.done == false}">
+            <td class="hidden-xs" style="width: 1%">{{ task.id }}</td>
+            <td>{{ task.text }}</td>
+            <td style="width: 1%; white-space: nowrap">{{ task.date | date : "short" }}</td>
+            <td style="width: 1%; white-space: nowrap">{{ task.completedDate | date : "short" }}</td>
+            <td style="width: 1%; text-align: center">
+                <input type="checkbox" ng-model="task.done" ng-change="updateTask(task)" style="margin-right: 4px;">
+                <span ng-bind="x.text"></span>
+            </td>
+        </tr>
+
+    </table>
+    <p>
+        <strong>Total tasks:</strong> {{ totalTasks() | number}} task(s)
+    </p>
+    <p>
+        <strong>Total uncompleted tasks:</strong> {{ totalUncompletedTasks() | number}} task(s)
+    </p>
+    <p>
+        <button class="btn btn-danger" ng-click="remove()">Remove completed tasks</button>
+    </p>
 </div>
-<br/>
-<p>
-    <button class="btn btn-default" ng-click="remove()">Remove marked</button>
-</p>
-
 <script src="../../js/angular/angular.js"></script>
 <script>
     "use strict";
+    // Generate a random number and convert it to base 36 (0-9a-z):
+    var token = function (n) {
+        return Math.random().toString(n).substr(2).toUpperCase(); // to make it longer
+    };
+
     var STORAGE_ID = 'tasks-angularjs';
 
     // define a class
     function Task(text, done) {
         // define properties
+        this.id = token(36);
         this.text = text;
         this.done = done;
+        this.date = new Date(); // now
+        this.completedDate = null;
     }
-
 
     var app = angular.module('myApp', []);
     app.controller('myController', function ($scope) {
         $scope.tasks = JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
+        $scope.totalTasks = function () {
+            return $scope.tasks.length;
+        };
 
+        $scope.totalUncompletedTasks = function () {
+            var count = 0;
+            angular.forEach($scope.tasks, function (task) {
+                if (!task.done) count++;
+            });
+            return count;
+        };
+
+        // METHOD
         $scope.addTask = function () {
             // create instance of class
             var task = new Task($scope.inputText, false);
@@ -60,12 +111,28 @@
             localStorage.setItem(STORAGE_ID, JSON.stringify($scope.tasks));
         };
 
+        // METHOD
+        $scope.updateTask = function (task) {
+            if (task.done) {
+                task.completedDate = new Date();
+            } else {
+                task.completedDate = null;
+            }
+
+
+            localStorage.setItem(STORAGE_ID, JSON.stringify($scope.tasks));
+        }
+
+        // METHOD
         $scope.remove = function () {
-            var oldList = $scope.todoList;
-            $scope.todoList = [];
-            angular.forEach(oldList, function (x) {
-                if (!x.done) $scope.todoList.push(x);
+            var tasks = $scope.tasks;
+            $scope.tasks = [];
+            angular.forEach(tasks, function (task, index) {
+                if (!task.done) $scope.tasks.push(task);
             });
+
+            // save to localStorage
+            localStorage.setItem(STORAGE_ID, JSON.stringify($scope.tasks));
         };
     });
 </script>

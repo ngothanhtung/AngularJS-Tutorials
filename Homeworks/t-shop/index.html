@@ -83,7 +83,7 @@
 <div ng-include="'footer.html'"></div>
 
 <script src="shop.js"></script>
-<script src="assets/data.js"></script>
+<script src="data.js"></script>
 <script src="../../js/angular/angular.js"></script>
 
 <script>
@@ -98,13 +98,12 @@
 
     var app = angular.module("myApp", []);
     app.controller("myController", function ($rootScope, $scope) {
-        $scope.products = products;
-        $scope.menuItems = menuItems;
         $scope.siteSetting = siteSetting;
+        $scope.menuItems = menuItems;
+        $scope.products = products;
 
         $rootScope.$on('$includeContentLoaded', function (event, url) {
             if (url == 'banner.html') {
-                console.log("BANNER LOADED");
                 $('.slider-v1').cycle({
                     //Specify options
                     fx: 'scrollHorz',

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>QUIZ</title>
+    <link href="../../css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
+
+</head>
+<html>
+
+<body ng-app="myApp" ng-controller="myController">
+<div class="container">
+    <div class="page-header">
+        <h1>QUIZ</h1>
+    </div>
+    <div class="question-block" ng-repeat="question in questions" ng-show="question.id === currentQuestion.id">
+        <h3>QUESTION {{ index + 1 }}: {{ question.text }} </h3>
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom: 8px">
+                <button class="btn btn-lg btn-block btn-primary" style="text-align: left" ng-click="check(question, 1)">
+                    A) {{ question.option1 }}
+                </button>
+            </div>
+            <div class="col-md-12" style="margin-bottom: 8px">
+                <button class="btn  btn-lg btn-block btn-primary" style="text-align: left" ng-click="check(question, 2)">
+                    B) {{ question.option2 }}
+                </button>
+            </div>
+            <div class="col-md-12" style="margin-bottom: 8px">
+                <button class="btn  btn-lg btn-block btn-primary" style="text-align: left" ng-click="check(question, 3)">
+                    C) {{ question.option3 }}
+                </button>
+            </div>
+            <div class="col-md-12" style="margin-bottom: 8px">
+                <button class="btn  btn-lg btn-block btn-primary" style="text-align: left" ng-click="check(question, 4)">
+                    D) {{ question.option4 }}
+                </button>
+            </div>
+        </div>
+    </div>
+    <p>
+    <hr/>
+    </p>
+    <p>
+        SCORE: {{ score }}
+    </p>
+    <p>
+        QUESTION: {{ index + 1 }} / {{ questions.length}}
+    </p>
+
+</div>
+<script src="../../js/angular/angular.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+<script>
+    "use strict";
+    // Generate a random number and convert it to base 36 (0-9a-z):
+    var token = function (n) {
+        return Math.random().toString(n).substr(2).toUpperCase(); // to make it longer
+    };
+
+    var STORAGE_ID = 'quiz-angularjs';
+
+    // define a class
+    function Question(text, option1, option2, option3, option4, correctOption) {
+        // define properties
+        this.id = token(36);
+        this.text = text;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
+        this.option4 = option4;
+        this.correctOption = correctOption;
+    }
+
+    var app = angular.module('myApp', []);
+    app.controller('myController', function ($scope) {
+        var questions = [];
+        // create instance of class
+        questions.push(new Question("Giai phong mien Nam?", "1945", "1975", "1954", "1930", 2));
+        questions.push(new Question("Giai phong Dien Bien Phu?", "1930", "1932", "1954", "1968", 3));
+
+        $scope.questions = questions;
+
+        $scope.index = 0;
+        $scope.currentQuestion = $scope.questions[$scope.index];
+        $scope.score = 0;
+
+        $scope.check = function (question, option) {
+            if (option === question.correctOption) {
+                // CORRECT
+                $scope.score++;
+
+            }
+
+            // NEXT QUESTION
+            if ($scope.index < $scope.questions)
+            $scope.index++;
+            $scope.currentQuestion = $scope.questions[$scope.index];
+        };
+    });
+</script>
+
+</body>
+</html>
+
