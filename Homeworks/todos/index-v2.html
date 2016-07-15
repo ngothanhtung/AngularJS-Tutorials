@@ -29,7 +29,26 @@
 <!-- UI - X Starts -->
 <div class="ui-todo">
     <div class="container">
-
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <h2>Add task</h2>
+                <form ng-submit="addTask()">
+                    <div class="form-group">
+                        <input type="text" ng-model="text" name="text" placeholder="Enter name" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="date" ng-model="date" name="date" placeholder="Enter date" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" ng-model="priority" name="priority" placeholder="Enter priority" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" ng-model="description" name="description" placeholder="Enter description" class="form-control"/>
+                    </div>
+                    <input type="submit" name="submit" value="Create" class="btn btn-danger">
+                </form>
+            </div>
+        </div>
         <!-- Main heading -->
         <h2>Tasks</h2>
 
@@ -74,7 +93,6 @@
             $(this).parents(".ui-item").fadeOut(300);		// On Click Fade Out
         });
     });
-
 </script>
 
 
@@ -82,19 +100,16 @@
 <script>
     var app = angular.module('myApp', []);
     app.controller('myController', function ($scope) {
-        $scope.tasks = [{text: 'Clean House', date: new Date(), priority: "High", description: "Lau nha cho vo" ,done: false}];
+        $scope.tasks = [
+            {text: 'Clean House', date: new Date(), priority: "High", description: "Lau nha cho vo", done: false}
+        ];
 
-        $scope.todoAdd = function () {
-            $scope.todoList.push({todoText: $scope.todoInput, done: false});
-            $scope.todoInput = "";
+        $scope.addTask = function () {
+            $scope.tasks.push({text: $scope.text, date: new Date(), priority: $scope.priority, description: $scope.description, done: false});
         };
 
-        $scope.remove = function () {
-            var oldList = $scope.todoList;
-            $scope.todoList = [];
-            angular.forEach(oldList, function (x) {
-                if (!x.done) $scope.todoList.push(x);
-            });
+        $scope.removeTask = function () {
+
         };
     });
 </script>

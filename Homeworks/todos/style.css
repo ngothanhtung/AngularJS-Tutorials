@@ -786,3 +786,96 @@ hr {
     line-height: 22px;
     margin: 3px 0px;
 }
+
+/* Ui X */
+.ui-15 {
+    padding: 0px 10px;
+}
+
+/* Ui Content */
+.ui-15 .ui-content {
+    max-width: 700px;
+    margin: 30px auto;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 5px 5px 0px 1px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 767px) {
+    .ui-15 .ui-content {
+        max-width: 400px;
+    }
+}
+
+.ui-15 .ui-content .ui-padd {
+    padding: 0px;
+}
+
+/* Ui social */
+.ui-15 .ui-content .ui-social {
+    padding: 25px 30px;
+    border-left: 1px solid #eee;
+    color: #999;
+}
+
+@media (max-width: 767px) {
+    .ui-15 .ui-content .ui-social {
+        border: 0px;
+        border-top: 1px solid #eee;
+    }
+}
+
+/* Heading */
+.ui-15 h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.ui-15 .ui-social ul li {
+    margin: 15px 0px;
+}
+
+/* Button */
+.ui-15 .ui-social ul li a {
+    width: 100%;
+    display: block;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 3px;
+    padding: 5px 10px;
+}
+
+/* Icon*/
+.ui-15 .ui-social ul li > a > i {
+    width: 25px;
+    text-align: center;
+}
+
+/* UI form */
+.ui-15 .ui-content .ui-form {
+    padding: 25px 30px;
+}
+
+/* UI Input */
+.ui-15 .ui-form .ui-input {
+    position: relative;
+    width: 100%;
+    margin: 15px 0px;
+}
+
+.ui-15 .ui-form .form-control {
+    height: 40px;
+}
+
+/* UI Icon */
+.ui-15 .ui-form .ui-icon {
+    right: 4px;
+    top: 0;
+    font-size: 14px;
+    width: 30px;
+    color: #ddd;
+    line-height: 40px;
+    position: absolute;
+    text-align: center;
+}
