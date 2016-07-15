@@ -53,11 +53,44 @@
     </p>
 
 </div>
+
+<div style="display: none">
+    <audio id="correct-sound" controls>
+        <source src="http://aptech-danang.edu.vn/Content/sounds/correct.mp3" type="audio/mp3">
+    </audio>
+    <audio id="wrong-sound" controls>
+        <source src="http://aptech-danang.edu.vn/Content/sounds/wrong.mp3" type="audio/mp3">
+    </audio>
+    <audio id="intro-sound" controls>
+        <source src="ai-la-trieu-phu.mp3" type="audio/mp3">
+    </audio>
+</div>
+
 <script src="../../js/jquery.min.js"></script>
 <script src="../../js/angular/angular.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
 <script>
     "use strict";
+
+    // PLAY SOUND
+    function playCorrectSound() {
+        var audio = $("#correct-sound")[0];
+        audio.play();
+    };
+
+    function playWrongSound() {
+        var audio = $("#wrong-sound")[0];
+        audio.play();
+    };
+
+    // PLAY SOUND
+    function playIntroSound() {
+        var audio = $("#intro-sound")[0];
+        audio.play();
+    };
+
+    playIntroSound();
+
     // Generate a random number and convert it to base 36 (0-9a-z):
     var token = function (n) {
         return Math.random().toString(n).substr(2).toUpperCase(); // to make it longer
@@ -94,6 +127,9 @@
             if (option === question.correctOption) {
                 // CORRECT
                 $scope.score++;
+                playCorrectSound();
+            } else {
+                playWrongSound();
             }
 
             // NEXT QUESTION
