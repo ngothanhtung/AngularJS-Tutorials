@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>QUIZ</title>
     <link href="../../css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../../css/animate.css" rel="stylesheet" type="text/css">
 </head>
 <html>
 
@@ -11,7 +14,7 @@
     <div class="page-header">
         <h1>QUIZ</h1>
     </div>
-    <div class="question-block" ng-repeat="question in questions" ng-show="question.id === currentQuestion.id">
+    <div id="question-{{ question.id }}" class="question-block" ng-repeat="question in questions" ng-show="question.id === currentQuestion.id">
         <h3>QUESTION {{ index + 1 }}: {{ question.text }} </h3>
         <div class="row">
             <div class="col-md-12" style="margin-bottom: 8px">
@@ -39,7 +42,7 @@
     <p>
 
     </p>
-    <div ng-show="gameover">
+    <div id="gameover" ng-show="gameover" style="text-align: center; padding: 20px; background-color: yellow; margin-bottom: 20px; border-radius: 20px;">
         <h1>GAME OVER</h1>
     </div>
     <p>
@@ -50,6 +53,7 @@
     </p>
 
 </div>
+<script src="../../js/jquery.min.js"></script>
 <script src="../../js/angular/angular.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
 <script>
@@ -93,14 +97,21 @@
             }
 
             // NEXT QUESTION
-
             $scope.index++;
             $scope.currentQuestion = $scope.questions[$scope.index];
+
+
 
             if ($scope.index >= $scope.questions.length) {
                 // GAME OVER
                 $scope.gameover = true;
                 $scope.index = $scope.questions.length - 1;
+
+                $("#gameover").addClass('animated bounceInUp');
+            } else {
+                // Add animation
+                var element = angular.element(document.querySelector('#question-' + $scope.currentQuestion.id));
+                element.addClass('animated bounceInLeft');
             }
         };
     });
