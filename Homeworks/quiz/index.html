@@ -43,9 +43,9 @@
             </div>
         </div>
         <div class="col-md-3">
-            <h3>LEVEL:</h3>
+            <h3>LEVEL: {{getCurrentClass()}}</h3>
             <div>
-                <button style="text-align: left" class="btn btn-block btn-default" ng-repeat="level in levels">
+                <button style="text-align: left" class="btn btn-block btn-default" ng-repeat="level in levels" ng-class="{ 'btn-danger': index +1 === level.index}">
                     {{ level.index }} - LEVEL: {{ level.level }} - MONEY: {{ level.money | number }}
                 </button>
             </div>
@@ -92,18 +92,21 @@
     function playCorrectSound() {
         var audio = $("#correct-sound")[0];
         audio.play();
-    };
+    }
+    ;
 
     function playWrongSound() {
         var audio = $("#wrong-sound")[0];
         audio.play();
-    };
+    }
+    ;
 
     // PLAY SOUND
     function playIntroSound() {
         var audio = $("#intro-sound")[0];
         audio.play();
-    };
+    }
+    ;
 
     playIntroSound();
 
@@ -130,11 +133,11 @@
     app.controller('myController', function ($scope) {
 
         var levels = [];
-        levels.push({ "index": 1, "money": 10, level: 1 });
-        levels.push({ "index": 2, "money": 20, level: 1 });
-        levels.push({ "index": 3, "money": 30, level: 1 });
-        levels.push({ "index": 4, "money": 40, level: 1 });
-        levels.push({ "index": 5, "money": 2000000, level: 1 });
+        levels.push({"index": 1, "money": 10, level: 1});
+        levels.push({"index": 2, "money": 20, level: 1});
+        levels.push({"index": 3, "money": 30, level: 1});
+        levels.push({"index": 4, "money": 40, level: 1});
+        levels.push({"index": 5, "money": 2000000, level: 1});
 
         $scope.levels = levels;
 
@@ -152,6 +155,8 @@
         $scope.currentQuestion = $scope.questions[$scope.index];
         $scope.score = 0;
         $scope.money = 0;
+
+
 
         $scope.check = function (question, option) {
             if (option === question.correctOption) {
