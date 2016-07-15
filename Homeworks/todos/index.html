@@ -4,28 +4,29 @@
     <title>TO DO</title>
     <link href="../../css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
-    <link href="shop.css" rel="stylesheet" type="text/css">
 </head>
 <html>
 
 <body class="container" ng-app="myApp" ng-controller="myController">
 
-<h2>My Todo List</h2>
+<div class="page-header">
+    <h1>To Do List</h1>
+</div>
 
-<form class="" ng-submit="todoAdd()">
-    <div class="form-group">
-        <input type="text" ng-model="todoInput" size="50" class="form-control" placeholder="Add New">
+<form class="panel" ng-submit="addTask()">
+    <div class="input-group">
+        <input type="text" ng-model="inputText" class="form-control" placeholder="Add new task">
+        <span class="input-group-btn">
+            <input type="submit" value="Add New" class="btn btn-primary">
+        </span>
     </div>
-    <div class="form-group">
-        <input type="submit" value="Add New" class="btn btn-default">
-    </div>
+
 </form>
-
 <hr/>
 
-<div ng-repeat="x in todoList">
-    <input type="checkbox" ng-model="x.done">
-    <span ng-bind="x.todoText"></span>
+<div ng-repeat="x in tasks" style="margin-bottom: 8px">
+    <input type="checkbox" ng-model="x.done" style="margin-right: 4px;">
+    <span ng-bind="x.text"></span>
 </div>
 <br/>
 <p>
@@ -34,13 +35,29 @@
 
 <script src="../../js/angular/angular.js"></script>
 <script>
+    "use strict";
+    var STORAGE_ID = 'tasks-angularjs';
+
+    // define a class
+    function Task(text, done) {
+        // define properties
+        this.text = text;
+        this.done = done;
+    }
+
+
     var app = angular.module('myApp', []);
     app.controller('myController', function ($scope) {
-        $scope.todoList = [{todoText: 'Clean House', done: false}];
+        $scope.tasks = JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
 
-        $scope.todoAdd = function () {
-            $scope.todoList.push({todoText: $scope.todoInput, done: false});
-            $scope.todoInput = "";
+        $scope.addTask = function () {
+            // create instance of class
+            var task = new Task($scope.inputText, false);
+            $scope.tasks.push(task);
+            $scope.inputText = "";
+
+            // save to localStorage
+            localStorage.setItem(STORAGE_ID, JSON.stringify($scope.tasks));
         };
 
         $scope.remove = function () {
