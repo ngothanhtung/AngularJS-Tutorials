@@ -14,31 +14,44 @@
     <div class="page-header">
         <h1>QUIZ</h1>
     </div>
-    <div id="question-{{ question.id }}" class="question-block" ng-repeat="question in questions" ng-show="question.id === currentQuestion.id">
-        <h3>QUESTION {{ index + 1 }}: {{ question.text }} </h3>
-        <div class="row">
-            <div class="col-md-12" style="margin-bottom: 8px">
-                <button class="btn btn-lg btn-block btn-primary" style="text-align: left" ng-click="check(question, 1)">
-                    A) {{ question.option1 }}
-                </button>
+    <div class="row">
+        <div class="col-md-9">
+            <div id="question-{{ question.id }}" class="question-block" ng-repeat="question in questions" ng-show="question.id === currentQuestion.id">
+                <h3>QUESTION {{ index + 1 }}: {{ question.text }} </h3>
+                <div class="row">
+                    <div class="col-md-12" style="margin-bottom: 8px">
+                        <button class="btn btn-lg btn-block btn-primary" style="text-align: left" ng-click="check(question, 1)">
+                            A) {{ question.option1 }}
+                        </button>
+                    </div>
+                    <div class="col-md-12" style="margin-bottom: 8px">
+                        <button class="btn  btn-lg btn-block btn-primary" style="text-align: left" ng-click="check(question, 2)">
+                            B) {{ question.option2 }}
+                        </button>
+                    </div>
+                    <div class="col-md-12" style="margin-bottom: 8px">
+                        <button class="btn  btn-lg btn-block btn-primary" style="text-align: left" ng-click="check(question, 3)">
+                            C) {{ question.option3 }}
+                        </button>
+                    </div>
+                    <div class="col-md-12" style="margin-bottom: 8px">
+                        <button class="btn  btn-lg btn-block btn-primary" style="text-align: left" ng-click="check(question, 4)">
+                            D) {{ question.option4 }}
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-12" style="margin-bottom: 8px">
-                <button class="btn  btn-lg btn-block btn-primary" style="text-align: left" ng-click="check(question, 2)">
-                    B) {{ question.option2 }}
-                </button>
-            </div>
-            <div class="col-md-12" style="margin-bottom: 8px">
-                <button class="btn  btn-lg btn-block btn-primary" style="text-align: left" ng-click="check(question, 3)">
-                    C) {{ question.option3 }}
-                </button>
-            </div>
-            <div class="col-md-12" style="margin-bottom: 8px">
-                <button class="btn  btn-lg btn-block btn-primary" style="text-align: left" ng-click="check(question, 4)">
-                    D) {{ question.option4 }}
+        </div>
+        <div class="col-md-3">
+            <h3>LEVEL:</h3>
+            <div>
+                <button style="text-align: left" class="btn btn-block btn-default" ng-repeat="level in levels">
+                    {{ level.index }} - LEVEL: {{ level.level }} - MONEY: {{ level.money | number }}
                 </button>
             </div>
         </div>
     </div>
+
     <p>
 
     </p>
@@ -47,6 +60,9 @@
     </div>
     <p>
         SCORE: {{ score }}
+    </p>
+    <p>
+        MONEY: {{ money }}
     </p>
     <p>
         QUESTION: {{ index + 1 }} / {{ questions.length}}
@@ -112,21 +128,36 @@
 
     var app = angular.module('myApp', []);
     app.controller('myController', function ($scope) {
+
+        var levels = [];
+        levels.push({ "index": 1, "money": 10, level: 1 });
+        levels.push({ "index": 2, "money": 20, level: 1 });
+        levels.push({ "index": 3, "money": 30, level: 1 });
+        levels.push({ "index": 4, "money": 40, level: 1 });
+        levels.push({ "index": 5, "money": 2000000, level: 1 });
+
+        $scope.levels = levels;
+
         var questions = [];
         // create instance of class
         questions.push(new Question("Giai phong mien Nam?", "1945", "1975", "1954", "1930", 2));
         questions.push(new Question("Giai phong Dien Bien Phu?", "1930", "1932", "1954", "1968", 3));
+        questions.push(new Question("2 + 3", "1", "2", "4", "5", 4));
+        questions.push(new Question("2 + 4", "19", "23", "4", "6", 4));
+        questions.push(new Question("2 + 8", "10", "2", "4", "5", 1));
 
         $scope.questions = questions;
 
         $scope.index = 0;
         $scope.currentQuestion = $scope.questions[$scope.index];
         $scope.score = 0;
+        $scope.money = 0;
 
         $scope.check = function (question, option) {
             if (option === question.correctOption) {
                 // CORRECT
                 $scope.score++;
+                $scope.money = $scope.levels[$scope.index].money;
                 playCorrectSound();
             } else {
                 playWrongSound();
