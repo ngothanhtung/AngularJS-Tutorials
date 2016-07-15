@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS | ShoppingCart</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+</head>
+<body ng-app="shopApp" ng-controller="shopController">
+<div class="container-fluid">
+    <header>
+        <h2>
+            AngularJS : Shopping Cart
+        </h2>
+        <hr/>
+    </header>
+    <div class="row">
+        <div class="col-md-8">
+            <h4>
+                PRODUCTS
+            </h4>
+            <div class="row">
+                <div ng-repeat="p in products" class="col-md-3 col-sm-6">
+                    <div class="img-thumbnail text-center" style="margin-bottom: 30px; padding: 20px">
+                        <img ng-src="{{ p.imageUrl }}" class="img img-responsive">
+                        <h5>{{ p.name }}</h5>
+                        <h6>Price: ${{ p.price }}</h6>
+                        <button ng-click="addToCart(p)" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4>
+                SELECTED PRODUCTS
+            </h4>
+
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>Id</th>
+                    <th style="width: 100%;">Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Sum</th>
+                    <th style="width: 1%"></th>
+
+                </tr>
+                <tr ng-repeat="p in selectedItems">
+                    <td>{{ p.id }}</td>
+                    <td>{{ p.name }}</td>
+                    <td class="text-right">
+                        ${{ p.price }}</td>
+                    <td>
+                        <input class="form-control" type="number" min="1" max="999" value="1" ng-model="p.quantity"/>
+                    </td>
+                    <td class="text-right">
+                        ${{ p.price * p.quantity }}</td>
+                    <td>
+                        <button ng-click="remove(p)" class="btn btn-sm btn-danger">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right" style="font-weight: bold" colspan="4">Total:</td>
+                    <td>
+                        ${{ getTotal() }}
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <footer>
+        <hr />
+        Developed by Ngo Thanh Tung - Softech Aptech
+    </footer>
+</div>
+
+
+<script type="text/javascript" src="js/angular.js"></script>
+<script>
+    // Khởi tạo mảng dữ liệu
+    var products = [
+        {id: "1", name: "Sony Alpha 7", price: "900", imageUrl: "images/a7.png"},
+        {id: "2", name: "Sony Alpha 6300", price: "1200", imageUrl: "images/a6300.jpg"},
+        {id: "3", name: "iPhone 6s", price: "900", imageUrl: "images/iphone6s.jpg"},
+        {id: "4", name: "Samsung Note 5", price: "750", imageUrl: "images/note5.jpg"},
+        {id: "5", name: "Playstation 3", price: "300", imageUrl: "images/ps3.jpg"},
+        {id: "6", name: "XBOX ONE", price: "500", imageUrl: "images/xboxone.jpg"},
+    ];
+
+
+    var app = angular.module("shopApp", []);
+    app.controller("shopController", function ($scope) {
+        // Dùng để hiển thị sản phẩm ra
+        $scope.products = products;
+
+
+        // dùng để chứa các sản phẩm đã bỏ vào giỏ hàng
+        var selectedItems = [];
+        $scope.selectedItems = selectedItems;
+
+
+        // Sự kiện click: chọn sản phẩm bỏ vào giỏ hàng
+        $scope.addToCart = function (product) {
+
+            var existItem = {};
+
+            // Kiểm tra sự tồn tại của sản phẩm trong giỏ hàng (selectedItems)
+            angular.forEach($scope.selectedItems, function (item, index) {
+                if (item.id === product.id) {
+                    existItem = item; // đối tượng existItem = item
+                    return false; // break loop
+                }
+            });
+
+            // Nếu tồn tại thì tăng quantity thêm 1
+            if (existItem.id !== undefined) {
+                existItem.quantity++;
+            }
+            // ngược lại thì thêm mới vào giỏ hàng
+            else {
+
+                var cartItem = angular.copy(product);
+                cartItem.quantity = 1;
+                $scope.selectedItems.push(cartItem);
+            }
+        };
+
+        // remove cart item
+        $scope.remove = function (cartItem) {
+
+            var index = $scope.selectedItems.indexOf(cartItem);
+            $scope.selectedItems.splice(index, 1);
+
+        };
+
+        $scope.getTotal = function () {
+            var total = 0;
+            angular.forEach($scope.selectedItems, function (item, index) {
+               total += (item.price * item.quantity);
+            })
+
+            return total;
+        }
+
+    });
+</script>
+</body>
+</html>
