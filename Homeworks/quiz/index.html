@@ -89,11 +89,9 @@
             if (option === question.correctOption) {
                 // CORRECT
                 $scope.score++;
-
             }
 
             // NEXT QUESTION
-            if ($scope.index < $scope.questions)
             $scope.index++;
             $scope.currentQuestion = $scope.questions[$scope.index];
         };
