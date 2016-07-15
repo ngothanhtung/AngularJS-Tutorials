@@ -100,18 +100,15 @@
             $scope.index++;
             $scope.currentQuestion = $scope.questions[$scope.index];
 
-
-
             if ($scope.index >= $scope.questions.length) {
                 // GAME OVER
                 $scope.gameover = true;
                 $scope.index = $scope.questions.length - 1;
-
-                $("#gameover").addClass('animated bounceInUp');
+                // ANIMATION
+                angular.element("#gameover").addClass('animated bounceInUp');
             } else {
-                // Add animation
-                var element = angular.element(document.querySelector('#question-' + $scope.currentQuestion.id));
-                element.addClass('animated bounceInLeft');
+                // ANIMATION
+                angular.element('#question-' + $scope.currentQuestion.id).addClass('animated bounceInLeft');
             }
         };
     });
