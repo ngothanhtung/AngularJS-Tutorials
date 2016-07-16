@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js">
+
+</script>
+<script>
+    var data = JSON.stringify({text: "Hello Slack"});
+    var settings = {
+        url: "https://hooks.slack.com/services/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",
+        method: "POST",
+        dataType: "application/x-www-form-urlencoded",
+        data: {
+            "payload": data
+        }
+    }
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
+</script>
+</body>
+</html>
