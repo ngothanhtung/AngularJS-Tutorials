@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery.min.js"></script>
+</head>
+<body>
+<script>
+    var url = "https://hooks.slack.com/services/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";
+    var text = "Hello";
+    var data = "payload=" + JSON.stringify({"text": text + new Date()});
+    $.ajax({
+        data: data,
+        dataType: 'json',
+        processData: false,
+        type: 'POST',
+        url: url
+    });
+</script>
+</body>
+</html>
