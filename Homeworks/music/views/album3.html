@@ -1,0 +1,13 @@
+<h4>Album: NEW ALBUM</h4>
+
+<div style="margin-top: 20px">
+    <div ng-controller="Album2Controller as album2">
+        <ul class="list-group">
+            <li ng-repeat="song in album2.songs" class="list-group-item">
+                <a ng-click="play(song)" href="#" onclick="return false;">
+                    {{ song.name }}
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
