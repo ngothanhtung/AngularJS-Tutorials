@@ -59,10 +59,10 @@
         <h1>GAME OVER</h1>
     </div>
     <p>
-        SCORE: {{ score }}
+        SCORE: {{ score | number }}
     </p>
     <p>
-        MONEY: {{ money }}
+        MONEY: {{ money | number }}
     </p>
     <p>
         QUESTION: {{ index + 1 }} / {{ questions.length}}
@@ -133,17 +133,17 @@
     app.controller('myController', function ($scope) {
 
         var levels = [];
-        levels.push({"index": 1, "money": 10, level: 1});
-        levels.push({"index": 2, "money": 20, level: 1});
-        levels.push({"index": 3, "money": 30, level: 1});
-        levels.push({"index": 4, "money": 40, level: 1});
+        levels.push({"index": 1, "money": 100000, level: 1});
+        levels.push({"index": 2, "money": 200000, level: 1});
+        levels.push({"index": 3, "money": 300000, level: 1});
+        levels.push({"index": 4, "money": 400000, level: 1});
         levels.push({"index": 5, "money": 2000000, level: 1});
 
         $scope.levels = levels;
 
         var questions = [];
         // create instance of class
-        questions.push(new Question("Giai phong mien Nam?", "1945", "1975", "1954", "1930", 2));
+        questions.push(new Question("Giải phóng Miền Nam thống nhất đất nước vào năm nào?", "1945", "1975", "1954", "1930", 2));
         questions.push(new Question("Giai phong Dien Bien Phu?", "1930", "1932", "1954", "1968", 3));
         questions.push(new Question("2 + 3", "1", "2", "4", "5", 4));
         questions.push(new Question("2 + 4", "19", "23", "4", "6", 4));
