@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+</head>
+<body ng-app="aptech" ng-controller="MainController as main">
+
+<div class="container-fluid">
+
+    <div ng-include="'views/common/header-ngview.html'"></div>
+
+    <!-- Main view  -->
+    <div ng-view>
+    </div>
+
+    <!-- Footer -->
+
+    <div ng-include="'views/common/footer.html'"></div>
+
+</div>
+<script src="../js/angular/angular.js"></script>
+<script src="../js/angular/angular-route.js"></script>
+<script src="app-ng-route.js"></script>
+<script src="../js/directives.js"></script>
+<script src="../js/controllers.js"></script>
+
+</body>
+</html>
