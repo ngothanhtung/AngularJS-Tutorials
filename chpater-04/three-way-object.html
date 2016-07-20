@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Firebase - Examples</title>
+    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container" ng-app="myApp" ng-controller="myController">
+    <p ng-bind="message | json">
+
+    </p>
+    <input ng-model="message.text" class="form-control">
+</div>
+<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/angular/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.0.1/angularfire.min.js"></script>
+
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyB9sUy-Ui4MhaN-GxACFKZrsUZzClcsaa4",
+        authDomain: "fir-example-83f8b.firebaseapp.com",
+        databaseURL: "https://fir-example-83f8b.firebaseio.com",
+        storageBucket: "fir-example-83f8b.appspot.com",
+    };
+    firebase.initializeApp(config);
+
+    var app = angular.module('myApp', ["firebase"]);
+    app.controller('myController', function ($scope, $firebaseObject) {
+        // [START recent_posts_query]
+        var ref = firebase.database().ref('message');
+        // [END recent_posts_query]
+
+        var syncObject = $firebaseObject(ref);
+        // synchronize the object with a three-way data binding
+        syncObject.$bindTo($scope, "message").then(function () {
+            //ref.set({text: 'holle'});
+            //console.log($scope.message.text);
+        });
+
+    });
+</script>
+</body>
+</html>

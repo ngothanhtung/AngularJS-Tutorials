@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Firebase - Examples</title>
+    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container" ng-app="myApp" ng-controller="myController">
+
+
+    <div class="row">
+        <div class="col-md-8">
+            <h3 id="current-fullname"></h3>
+            <h4 id="current-email"></h4>
+            <form id="form-join-chat" ng-submit="join()">
+                <div class="form-group">
+                    <label for="fullName">Full name: </label>
+                    <input id="fullName" type="text" ng-model="fullName" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-block btn-primary" type="submit">Join</button>
+                </div>
+            </form>
+
+            <form ng-submit="send()">
+                <div class="form-group">
+                    <label for="text">Message: </label>
+                    <input id="text" type="text" ng-model="text" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-block btn-primary" type="submit">Submit</button>
+                </div>
+            </form>
+
+            <hr/>
+            <div class="">
+                <div ng-repeat="message in messages">
+                    <div>
+                        {{ message.email }}: {{ message.text }}
+                    </div>
+                    <small> {{ message.createdDate | date : 'medium' }}</small>
+                    <hr/>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div id="list-users">
+                <h3>USERS</h3>
+                <h4>Chat with: {{ selectedUser.fullName }}</h4>
+                <div class="list-group">
+                    <a ng-repeat="user in users" ng-click="selectUser(user)" ng-href="#" class="list-group-item" title="{{ user.uid }}">
+                        {{ user.fullName }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<script src="firebase.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/angular/angular.js"></script>
+<script src="angularfire.js"></script>
+
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyB9sUy-Ui4MhaN-GxACFKZrsUZzClcsaa4",
+        authDomain: "fir-example-83f8b.firebaseapp.com",
+        databaseURL: "https://fir-example-83f8b.firebaseio.com",
+        storageBucket: "fir-example-83f8b.appspot.com",
+    };
+    firebase.initializeApp(config);
+    // Listen for auth state changes
+    firebase.auth().onAuthStateChanged(function (user) {
+        // LOGGED IN
+        if (user) {
+            $("#current-email").text(user.email);
+
+            // [START get user by uid]
+            var ref = firebase.database().ref('users');
+            var uid = user.uid;
+            ref.orderByChild("uid").equalTo(uid).on("child_added", function (snapshot) {
+                var u = snapshot.val();
+                $("#current-fullname").text(u.fullName);
+            });
+            // [END get user by uid]
+
+            console.log("Authenticated", user);
+
+            // HIDE form-join-chat
+            $("#form-join-chat").hide();
+        } else {
+            window.location = "login.html";
+            console.log("Not Authenticated");
+        }
+    });
+
+    // ANGULARJS
+    var app = angular.module('myApp', ["firebase"]);
+    app.controller('myController', function ($scope, $firebaseArray) {
+        // [START get messages]
+        var ref = firebase.database().ref('messages').limitToLast(100);
+        $scope.messages = $firebaseArray(ref);
+        // [END get messages]
+
+        // [START get users]
+        var refUsers = firebase.database().ref('users');
+        $scope.users = $firebaseArray(refUsers);
+        // [END get users]
+
+        $scope.selectUser = function (user) {
+            $scope.selectedUser = user;
+        }
+        
+        $scope.join = function () {
+            var currentUser = firebase.auth().currentUser;
+
+            // A user entry.
+            var user = {
+                uid: currentUser.uid,
+                fullName: $scope.fullName
+            };
+
+            // Get a key for a new product.
+            var key = firebase.database().ref().child('users').push().key;
+            var updates = {};
+            updates['/users/' + key] = user;
+            return firebase.database().ref().update(updates, function (error) {
+                if (error) {
+                    console.log('Synchronization failed');
+                } else {
+                    console.log('Synchronization succeeded');
+                    $("#form-join-chat").hide();
+                }
+            });
+        }
+
+        // SEND
+        $scope.send = function () {
+            var userId = firebase.auth().currentUser.uid;
+
+            // A message entry.
+            var message = {
+                uid: userId,
+                email: $("#current-email").text(),
+                text: $scope.text,
+                createdDate: new Date()
+            };
+
+            // Get a key for a new product.
+            var key = firebase.database().ref().child('messages').push().key;
+
+            var updates = {};
+            updates['/messages/' + key] = message;
+            return firebase.database().ref().update(updates, function (error) {
+                if (error) {
+                    console.log('Synchronization failed');
+                } else {
+                    console.log('Synchronization succeeded');
+                    $scope.text = "";
+                }
+            });
+        };
+    });
+</script>
+</body>
+</html>
