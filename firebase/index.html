@@ -38,9 +38,10 @@
         <table class="table table-bordered table-hover">
             <tr>
                 <th>Name</th>
-                <th>Price</th>
                 <th>Stock</th>
+                <th>Price</th>
                 <th>Discount</th>
+                <th>Total</th>
                 <th></th>
             </tr>
             <tr ng-repeat="p in products">
@@ -48,30 +49,32 @@
                     <input ng-model="p.name" class="form-control"/>
                 </td>
                 <td class="form-inline" style="width: 1%; white-space: nowrap; vertical-align: middle">
-                    <input ng-model="p.price" style="width: 100px" class="form-control text-right"/> $
-                </td>
-                <td class="form-inline" style="width: 1%; white-space: nowrap; vertical-align: middle">
                     <input ng-model="p.stock" style="width: 80px" class="form-control text-right"/>
                 </td>
+                <td class="form-inline" style="width: 1%; white-space: nowrap; vertical-align: middle">
+                    <input ng-model="p.price" style="width: 100px" class="form-control text-right"/> $
+                </td>
+
                 <td class="form-inline" style="width: 1%; white-space: nowrap; vertical-align: middle">
                     <input ng-model="p.discount" style="width: 80px" class="form-control text-right"/> %
                 </td>
                 <td class="form-inline" style="width: 1%; white-space: nowrap; vertical-align: middle">
-                    <button title="Save" ng-click="products.$save(p)" class="btn btn-sm btn-primary">Save</button>
-                    <button title="Remove" ng-click="products.$remove(p)" class="btn btn-sm btn-danger">Remove</button>
+                    <span ng-bind="(p.price * (100 - p.discount) / 100) + '$'"></span>
+                </td>
+                <td class="form-inline" style="width: 1%; white-space: nowrap; vertical-align: middle">
+                    <button title="Save" ng-click="updateProduct(p)" class="btn btn-sm btn-primary">Save</button>
+                    <button title="Remove" ng-click="removeProduct(p)" class="btn btn-sm btn-danger">Remove</button>
                 </td>
             </tr>
         </table>
     </div>
 </div>
-<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+<script src="firebase.js"></script>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/angular/angular.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.0.1/angularfire.min.js"></script>
+<script src="angularfire.js"></script>
 
 <script>
-
-
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyB9sUy-Ui4MhaN-GxACFKZrsUZzClcsaa4",
@@ -91,34 +94,7 @@
         }
     });
 
-    function writeNewProduct(name, price, stock, discount) {
-        var userId = firebase.auth().currentUser.uid;
-
-        // A product entry.
-        var product = {
-            uid: userId,
-            name: name,
-            price: price,
-            stock: stock,
-            discount: discount,
-        };
-
-        // Get a key for a new product.
-        var key = firebase.database().ref().child('products').push().key;
-
-        var updates = {};
-        updates['/products/' + key] = product;
-        return firebase.database().ref().update(updates, onComplete);
-    }
-
-    function onComplete(error) {
-        if (error) {
-            console.log('Synchronization failed');
-        } else {
-            console.log('Synchronization succeeded');
-        }
-    }
-
+    // ANGULARJS
     var app = angular.module('myApp', ["firebase"]);
     app.controller('myController', function ($scope, $firebaseArray) {
         $scope.index = 0;
@@ -130,16 +106,45 @@
         var ref = firebase.database().ref('products').limitToLast(100);
         // [END recent_posts_query]
 
-
-        // download the data into a local object
-        //$scope.products = $firebaseObject(ref);
-
-
         $scope.products = $firebaseArray(ref);
 
-        $scope.post = function () {
-            writeNewProduct($scope.name, $scope.price, $scope.stock, $scope.discount);
+        // ADD PRODUCT
+        $scope.addProduct = function () {
+            var userId = firebase.auth().currentUser.uid;
+
+            // A product entry.
+            var product = {
+                uid: userId,
+                name: $scope.name,
+                price: $scope.price,
+                stock: $scope.stock,
+                discount: $scope.discount,
+            };
+
+            // Get a key for a new product.
+            var key = firebase.database().ref().child('products').push().key;
+
+            var updates = {};
+            updates['/products/' + key] = product;
+            return firebase.database().ref().update(updates, function (error) {
+                if (error) {
+                    console.log('Synchronization failed');
+                } else {
+                    console.log('Synchronization succeeded');
+                }
+            });
         };
+
+        $scope.removeProduct = function (product) {
+            if (confirm("Are you sure to delete this item?")) {
+                $scope.products.$remove(product);
+            }
+
+        }
+
+        $scope.updateProduct = function (product) {
+            $scope.products.$save(product);
+        }
     });
 </script>
 </body>
