@@ -42,7 +42,7 @@
 
             <hr/>
             <div class="">
-                <div ng-repeat="message in messages">
+                <div ng-repeat="message in messages | orderBy:'createdDate':'reverse'">
                     <div>
                         {{ message.email }}: {{ message.text }}
                     </div>
@@ -162,6 +162,7 @@
 
             var updates = {};
             updates['/messages/' + key] = message;
+
             return firebase.database().ref().update(updates, function (error) {
                 if (error) {
                     console.log('Synchronization failed');
