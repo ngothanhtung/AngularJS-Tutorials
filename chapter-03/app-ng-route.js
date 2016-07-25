@@ -7,7 +7,6 @@ var app = angular.module('aptech', [
     'ngRoute',
 ]);
 
-
 // Config
 function config($routeProvider) {
     $routeProvider
