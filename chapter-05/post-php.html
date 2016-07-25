@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>POST</title>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myController">
+    <button ng-click="post()">POST DATA</button>
+</div>
+<script type="text/javascript" src="../js/angular/angular.js"></script>
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myController', function ($scope, $http) {
+        $scope.post = function () {
+            var url = "http://localhost:8000/insert-ajax.php";
+            var data = "data=" + JSON.stringify({
+                "content": "ABCD",
+                "option1": "1",
+                "option2": "2",
+                "option3": "3",
+                "option4": "4",
+                "correctoption": "4"
+            });
+
+            $http({
+                url: url,
+                dataType: 'json',
+                method: 'POST',
+                data: data,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (response) {
+                console.log(response);
+            }, function (response) {
+                console.log(response);
+            });
+        };
+    });
+</script>
+</body>
+</html>
