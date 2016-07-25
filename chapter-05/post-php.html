@@ -14,14 +14,16 @@
     app.controller('myController', function ($scope, $http) {
         $scope.post = function () {
             var url = "http://localhost:8000/insert-ajax.php";
-            var data = "data=" + JSON.stringify({
-                "content": "ABCD",
-                "option1": "1",
-                "option2": "2",
-                "option3": "3",
-                "option4": "4",
-                "correctoption": "4"
-            });
+            var data = {
+                    question: {
+                    "content": "ABCD",
+                    "option1": "1",
+                    "option2": "2",
+                    "option3": "3",
+                    "option4": "4",
+                    "correctoption": "4"
+                }
+            };
 
             $http({
                 url: url,
