@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="../js/jquery.min.js"></script>
+<script>
+
+    var data = {
+        question: {
+            "content": "ABCD",
+            "option1": "1",
+            "option2": "2",
+            "option3": "3",
+            "option4": "4",
+            "correctoption": "4"
+        }
+    };
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        url: "http://localhost:8000/insert-ajax.php", //Relative or absolute path to response.php file
+        data: data,
+        error: function(data) {
+            console.log("Error", data);
+        },
+        success: function (data) {
+            console.log(data);
+        }
+    });
+</script>
+</body>
+</html>

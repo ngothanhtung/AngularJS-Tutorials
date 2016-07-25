@@ -13,9 +13,9 @@
     var app = angular.module('myApp', []);
     app.controller('myController', function ($scope, $http) {
         $scope.post = function () {
-            var url = "http://localhost:8000/insert-ajax.php";
+            var url = "http://localhost:8000/insert-ajax-angularjs.php";
             var data = {
-                    question: {
+                question: {
                     "content": "ABCD",
                     "option1": "1",
                     "option2": "2",
