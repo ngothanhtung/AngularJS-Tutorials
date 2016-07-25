@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myController">
+
+    <table>
+        <tr ng-repeat="x in products">
+            <td>{{ x.id }}</td>
+            <td>{{ x.name }}
+            <td>{{ x.price | currency }}</td>
+            <td>{{ x.stock | number }}</td>
+        </tr>
+    </table>
+
+</div>
+<script type="text/javascript" src="../js/angular/angular.js"></script>
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myController', function ($scope, $http) {
+        $http.get("http://localhost/mysql/get.php")
+                .then(function (response) {
+                    $scope.products = response.data.products;
+                });
+    });
+</script>
+</body>
+</html>
