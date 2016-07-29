@@ -5,31 +5,26 @@
     <title>Directive Example</title>
 </head>
 <body ng-app="myApp" ng-controller="myController">
+<h1>CONTACTS</h1>
 
-<contact-cart myTitle="myTitle"></contact-cart>
-
+<div ng-repeat="c in contacts">
+    <contact-cart id="abc" contact="c" title="'Contact'"></contact-cart>
+</div>
 <script src="../js/angular/angular.js"></script>
+<script src="./contactCard.js"></script>
 <script>
-    var app = angular.module("myApp", []);
+    var app = angular.module("myApp", [
+        "app.directives.contactCard"
+    ]);
     app.controller("myController", function ($scope) {
-        $scope.myTitle = "Hello";
+        $scope.contacts = [
+            {name: "John", address: "England", phone: "0985123456"},
+            {name: "Peter", address: "England", phone: "0905123456"},
+            {name: "Mary", address: "Scotland", phone: "0965123456"},
+        ];
     });
 
 
-    app.directive("contactCart", function () {
-        return {
-            restrict: "E", //E = element, A = attribute, C = class, M = comment
-            scope: {},
-            template: "<h1>{{ myTitle }}</h1>",
-            templateUrl: "templates/header.html",
-            controller: function ($scope) {
-
-            },
-            link: function ($scope, element, attributes) {
-
-            }
-        };
-    });
 </script>
 </body>
 </html>
