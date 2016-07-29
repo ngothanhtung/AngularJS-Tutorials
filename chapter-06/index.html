@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Directive Example</title>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+
+<contact-cart myTitle="myTitle"></contact-cart>
+
+<script src="../js/angular/angular.js"></script>
+<script>
+    var app = angular.module("myApp", []);
+    app.controller("myController", function ($scope) {
+        $scope.myTitle = "Hello";
+    });
+
+
+    app.directive("contactCart", function () {
+        return {
+            restrict: "E", //E = element, A = attribute, C = class, M = comment
+            scope: {},
+            template: "<h1>{{ myTitle }}</h1>",
+            templateUrl: "templates/header.html",
+            controller: function ($scope) {
+
+            },
+            link: function ($scope, element, attributes) {
+
+            }
+        };
+    });
+</script>
+</body>
+</html>
