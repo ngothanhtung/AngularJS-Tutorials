@@ -1,9 +1,10 @@
 angular.module("app.directives.contactCard", [])
-    .directive("contactCart", function () {
+    .directive("contactCard", function () {
         return {
-            restrict: "E", //E = element, A = attribute, C = class, M = comment
+            restrict: "EA", //E = element, A = attribute, C = class, M = comment
             scope: {
-                contact: "=", // myData: "=data"
+                contact: "=",
+                //myData: "=data",
                 title: "="
             },
             replace: true,
@@ -22,6 +23,7 @@ angular.module("app.directives.contactCard", [])
                 console.log(attrs.id); // GET ID
 
                 element.on("click", function (e) {
+                    alert("CLICK");
                     //console.log(e);
                 });
             }
