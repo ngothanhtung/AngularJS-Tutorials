@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Service Examples</title>
+<body>
+<div ng-app="myApp" ng-controller="myController">
+
+    <table>
+        <tr ng-repeat="x in users">
+            <td>{{ x.username }}</td>
+            <td>{{ x.address }}
+        </tr>
+    </table>
+
+</div>
+<script type="text/javascript" src="../js/angular/angular.js"></script>
+<script>
+    // A Service is just a function for the business layer of the application,
+    // it’s just a simple function.
+    // It acts as a constructor function and is invoked once at runtime with new,
+    // much like you would with plain JavaScript (Angular is just calling a new instance under the hood for us).
+    function JsonService($http) {
+        this.getUsers = function() {
+            return $http.get("http://localhost:3000/users");
+        };
+    }
+
+    var app = angular.module('myApp', []);
+    // Register service
+    app.service('JsonService', JsonService);
+    app.controller('myController', function ($scope, JsonService) {
+        JsonService.getUsers().then(function (response) {
+            $scope.users = response.data;
+            console.log($scope.users);
+        });
+
+    });
+</script>
+</body>
+</html>

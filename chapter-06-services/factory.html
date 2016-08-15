@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Factory Examples</title>
+<body>
+<div ng-app="myApp" ng-controller="myController">
+
+    <table>
+        <tr ng-repeat="x in users">
+            <td>{{ x.username }}</td>
+            <td>{{ x.address }}
+        </tr>
+    </table>
+
+</div>
+<script type="text/javascript" src="../js/angular/angular.js"></script>
+<script>
+    function JsonFactory($http) {
+        //Constructor
+        /*
+        return function () {
+            return $http.get('http://localhost:3000/users');
+        };
+        */
+
+        return {
+
+            getUsers: function () {
+                return $http.get("http://localhost:3000/users");
+            },
+            getAdmins: function () {
+                return $http.get("http://localhost:3000/users/getAdmins");
+            }
+        };
+
+    }
+
+
+
+    var app = angular.module('myApp', []);
+    // Register factory
+    app.factory('JsonFactory', JsonFactory);
+
+
+    /*
+    app.controller('myController', function ($scope, JsonFactory) {
+        JsonFactory().then(function (response) {
+            $scope.users = response.data;
+            //console.log($scope.users);
+        });
+    });
+    */
+
+    app.controller('myController', function ($scope, JsonFactory) {
+        JsonFactory.getUsers().then(function (response) {
+            $scope.users = response.data;
+            //console.log($scope.users);
+        });
+    });
+
+</script>
+</body>
+</html>
