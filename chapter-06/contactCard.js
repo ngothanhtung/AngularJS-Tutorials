@@ -13,11 +13,11 @@ angular.module("app.directives.contactCard", [])
             controller: function ($scope, $interval) {
 
                 console.log($scope.contact);
-                /*
-                 $interval(function () {
-                 console.log("interval");
-                 }, 1000);
-                 */
+
+                $interval(function () {
+                    console.log("interval");
+                }, 1000);
+
             },
             link: function (scope, element, attrs) {
                 console.log(attrs.id); // GET ID

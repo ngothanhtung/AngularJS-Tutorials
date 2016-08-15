@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Directive Example</title>
+    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
 </head>
 <body ng-app="myApp" ng-controller="myController">
-<h1>CONTACTS</h1>
+<div class="container-fluid">
+    <h1>CONTACTS</h1>
 
-<div ng-repeat="c in contacts">
-    <contact-card id="abc" contact="c" title="'Contact Header'"></contact-card>
+    <div ng-repeat="c in contacts">
+        <contact-cart id="abc" contact="c" title="'Contact'"></contact-cart>
+    </div>
 </div>
 <script src="../js/angular/angular.js"></script>
 <script src="./contactCard.js"></script>
