@@ -95,10 +95,16 @@
             });
             // [END get user by uid]
 
-            console.log("Authenticated", user);
+            //console.log("Authenticated", user);
 
             // HIDE form-join-chat
             $("#form-join-chat").hide();
+
+            var db = firebase.database();
+            var refMessages = db.ref('messages').orderByChild('sendTo').equalTo(uid).on('child_added', function (snapshot) {
+                console.log(snapshot.val());
+            })
+
         } else {
             window.location = "login.html";
             console.log("Not Authenticated");
@@ -108,6 +114,9 @@
     // ANGULARJS
     var app = angular.module('myApp', ["firebase"]);
     app.controller('myController', function ($scope, $firebaseArray) {
+
+
+
         // [START get messages]
         var ref = firebase.database().ref('messages').limitToLast(100);
         $scope.messages = $firebaseArray(ref);
@@ -121,7 +130,7 @@
         $scope.selectUser = function (user) {
             $scope.selectedUser = user;
         }
-        
+
         $scope.join = function () {
             var currentUser = firebase.auth().currentUser;
 
@@ -131,7 +140,7 @@
                 fullName: $scope.fullName
             };
 
-            // Get a key for a new product.
+            // Get a key for a new user.
             var key = firebase.database().ref().child('users').push().key;
             var updates = {};
             updates['/users/' + key] = user;
@@ -152,13 +161,12 @@
             // A message entry.
             var message = {
                 uid: userId,
-                email: $("#current-email").text(),
+                sendTo: $scope.selectedUser.uid,
                 text: $scope.text,
                 createdDate: new Date(),
-                sendTo: $scope.selectedUser.uid
             };
 
-            // Get a key for a new product.
+            // Get a key for a new message.
             var key = firebase.database().ref().child('messages').push().key;
 
             var updates = {};
