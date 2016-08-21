@@ -53,8 +53,8 @@
         </div>
         <div class="col-md-4">
             <div id="list-users">
-                <h3>USERS</h3>
-                <h4>Chat with: {{ selectedUser.fullName }}</h4>
+                <h4>USERS</h4>
+                <h5>Chat with: {{ selectedUser.fullName }}</h5>
                 <div class="list-group">
                     <a ng-repeat="user in users" ng-click="selectUser(user)" ng-href="#" class="list-group-item" title="{{ user.uid }}">
                         {{ user.fullName }}
@@ -154,7 +154,8 @@
                 uid: userId,
                 email: $("#current-email").text(),
                 text: $scope.text,
-                createdDate: new Date()
+                createdDate: new Date(),
+                sendTo: $scope.selectedUser.uid
             };
 
             // Get a key for a new product.

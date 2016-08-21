@@ -24,6 +24,12 @@
         this.getUsers = function() {
             return $http.get("http://localhost:3000/users");
         };
+        this.getproduct =function () {
+            return {
+                name: 'ipad',
+                price: 900
+            };
+        }
     }
 
     var app = angular.module('myApp', []);
@@ -34,7 +40,6 @@
             $scope.users = response.data;
             console.log($scope.users);
         });
-
     });
 </script>
 </body>
