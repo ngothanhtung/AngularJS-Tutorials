@@ -81,6 +81,8 @@
 
 <script type="text/javascript" src="js/angular.js"></script>
 <script>
+    var STORAGE_ID = 'shopping-cart-items';
+
     // Khởi tạo mảng dữ liệu
     var products = [
         {id: "1", name: "Sony Alpha 7", price: "900", imageUrl: "images/a7.png"},
@@ -97,11 +99,9 @@
         // Dùng để hiển thị sản phẩm ra
         $scope.products = products;
 
-
         // dùng để chứa các sản phẩm đã bỏ vào giỏ hàng
-        var selectedItems = [];
+        var selectedItems = JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
         $scope.selectedItems = selectedItems;
-
 
         // Sự kiện click: chọn sản phẩm bỏ vào giỏ hàng
         $scope.addToCart = function (product) {
@@ -127,6 +127,9 @@
                 cartItem.quantity = 1;
                 $scope.selectedItems.push(cartItem);
             }
+
+            // save to localStorage
+            localStorage.setItem(STORAGE_ID, JSON.stringify($scope.selectedItems));
         };
 
         // remove cart item
@@ -135,13 +138,19 @@
             var index = $scope.selectedItems.indexOf(cartItem);
             $scope.selectedItems.splice(index, 1);
 
+            // save to localStorage
+            localStorage.setItem(STORAGE_ID, JSON.stringify($scope.selectedItems));
+
         };
 
         $scope.getTotal = function () {
             var total = 0;
             angular.forEach($scope.selectedItems, function (item, index) {
                total += (item.price * item.quantity);
-            })
+            });
+
+            // save to localStorage
+            localStorage.setItem(STORAGE_ID, JSON.stringify($scope.selectedItems));
 
             return total;
         }
