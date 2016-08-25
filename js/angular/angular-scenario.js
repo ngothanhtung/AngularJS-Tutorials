@@ -7830,7 +7830,7 @@ jQuery.extend({
 			text: "text/plain",
 			html: "text/html",
 			xml: "application/xml, text/xml",
-			json: "application/json, text/reviews"
+			json: "application/json, text/chapter-00-reviews"
 		},
 
 		contents: {
@@ -8644,7 +8644,7 @@ jQuery.ajaxTransport(function( options ) {
 // Install script dataType
 jQuery.ajaxSetup({
 	accepts: {
-		script: "text/reviews, application/reviews, application/ecmascript, application/x-ecmascript"
+		script: "text/chapter-00-reviews, application/chapter-00-reviews, application/ecmascript, application/x-ecmascript"
 	},
 	contents: {
 		script: /(?:java|ecma)script/
@@ -11769,7 +11769,7 @@ function publishExternalAPI(angular) {
  *          An approval from 2 Core members with history of modifying      *
  *                         this file is required.                          *
  *                                                                         *
- *  Does the change somehow allow for arbitrary reviews to be executed? *
+ *  Does the change somehow allow for arbitrary chapter-00-reviews to be executed? *
  *    Or allows for someone to change the prototype of built-in objects?   *
  *     Or gives undesired access to variables likes document or window?    *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -15714,7 +15714,7 @@ function $TemplateCacheProvider() {
  *          An approval from 2 Core members with history of modifying      *
  *                         this file is required.                          *
  *                                                                         *
- *  Does the change somehow allow for arbitrary reviews to be executed? *
+ *  Does the change somehow allow for arbitrary chapter-00-reviews to be executed? *
  *    Or allows for someone to change the prototype of built-in objects?   *
  *     Or gives undesired access to variables likes document or window?    *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -20663,7 +20663,7 @@ function createHttpBackend($browser, createXhr, $browserDefer, callbacks, rawDoc
     // - fetches local scripts via XHR and evals them
     // - adds and immediately removes script elements from the document
     var script = rawDocument.createElement('script'), callback = null;
-    script.type = "text/reviews";
+    script.type = "text/chapter-00-reviews";
     script.src = url;
     script.async = true;
 
@@ -22163,7 +22163,7 @@ function $LocationProvider() {
         absHref = urlResolve(absHref.animVal).href;
       }
 
-      // Ignore when url is started with reviews: or mailto:
+      // Ignore when url is started with chapter-00-reviews: or mailto:
       if (IGNORE_URI_REGEXP.test(absHref)) return;
 
       if (absHref && !elm.attr('target') && !event.isDefaultPrevented()) {
@@ -22444,7 +22444,7 @@ function $LogProvider() {
  *          An approval from 2 Core members with history of modifying      *
  *                         this file is required.                          *
  *                                                                         *
- *  Does the change somehow allow for arbitrary reviews to be executed? *
+ *  Does the change somehow allow for arbitrary chapter-00-reviews to be executed? *
  *    Or allows for someone to change the prototype of built-in objects?   *
  *     Or gives undesired access to variables likes document or window?    *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -24723,7 +24723,7 @@ function qFactory(nextTick, exceptionHandler) {
     }
   });
 
-  //Faster, more basic than angular.bind http://jsperf.com/angular-bind-vs-custom-vs-native
+  //Faster, more chapter-99-others than angular.bind http://jsperf.com/angular-bind-vs-custom-vs-native
   function simpleBind(context, fn) {
     return function(value) {
       fn.call(context, value);
@@ -26511,7 +26511,7 @@ function $$SanitizeUriProvider() {
  *          An approval from 2 Core members with history of modifying      *
  *                         this file is required.                          *
  *                                                                         *
- *  Does the change somehow allow for arbitrary reviews to be executed? *
+ *  Does the change somehow allow for arbitrary chapter-00-reviews to be executed? *
  *    Or allows for someone to change the prototype of built-in objects?   *
  *     Or gives undesired access to variables likes document or window?    *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -27244,7 +27244,7 @@ function $SceProvider() {
   this.$get = ['$parse', '$sceDelegate', function(
                 $parse,   $sceDelegate) {
     // Prereq: Ensure that we're not running in IE<11 quirks mode.  In that mode, IE < 11 allow
-    // the "expression(reviews expression)" syntax which is insecure.
+    // the "expression(chapter-00-reviews expression)" syntax which is insecure.
     if (enabled && msie < 8) {
       throw $sceMinErr('iequirks',
         'Strict Contextual Escaping does not support Internet Explorer version < 11 in quirks ' +
@@ -29685,7 +29685,7 @@ function orderByFilter($parse) {
       value = value.toString();
       if (isPrimitive(value)) return value;
     }
-    // We have a basic object so we use the position of the object in the collection
+    // We have a chapter-99-others object so we use the position of the object in the collection
     return index;
   }
 
@@ -41613,7 +41613,7 @@ angular.scenario.output('html', function(context, runner, model) {
   runner.on('InteractivePause', function(spec) {
     var ui = lastStepUiMap[spec.id];
     ui.find('.test-title').
-      html('paused... <a href="reviews:resume()">resume</a> when ready.');
+      html('paused... <a href="chapter-00-reviews:resume()">resume</a> when ready.');
   });
 
   runner.on('SpecBegin', function(spec) {

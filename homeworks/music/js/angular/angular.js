@@ -2577,7 +2577,7 @@ function publishExternalAPI(angular) {
  *          An approval from 2 Core members with history of modifying      *
  *                         this file is required.                          *
  *                                                                         *
- *  Does the change somehow allow for arbitrary chapter-00-reviews to be executed? *
+ *  Does the change somehow allow for arbitrary javascript to be executed? *
  *    Or allows for someone to change the prototype of built-in objects?   *
  *     Or gives undesired access to variables likes document or window?    *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -3023,7 +3023,7 @@ function jqLiteAddNodes(root, elements) {
 
   if (elements) {
 
-    // if a Node (the most common case)
+    // if a Node (the most shared case)
     if (elements.nodeType) {
       root[root.length++] = elements;
     } else {
@@ -6522,7 +6522,7 @@ function $TemplateCacheProvider() {
  *          An approval from 2 Core members with history of modifying      *
  *                         this file is required.                          *
  *                                                                         *
- *  Does the change somehow allow for arbitrary chapter-00-reviews to be executed? *
+ *  Does the change somehow allow for arbitrary javascript to be executed? *
  *    Or allows for someone to change the prototype of built-in objects?   *
  *     Or gives undesired access to variables likes document or window?    *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -8269,7 +8269,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
      * @param node Node to search.
      * @param directives An array to which the directives are added to. This array is sorted before
      *        the function returns.
-     * @param attrs The common attrs object which is used to populate the normalized attributes.
+     * @param attrs The shared attrs object which is used to populate the normalized attributes.
      * @param {number=} maxPriority Max directive priority.
      */
     function collectDirectives(node, directives, attrs, maxPriority, ignoreDirective) {
@@ -8456,7 +8456,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
      * @param {Array} directives Array of collected directives to execute their compile function.
      *        this needs to be pre-sorted by priority order.
      * @param {Node} compileNode The raw DOM node to apply the compile functions to
-     * @param {Object} templateAttrs The common attribute function
+     * @param {Object} templateAttrs The shared attribute function
      * @param {function(angular.Scope, cloneAttachFn=)} transcludeFn A linking function, where the
      *                                                  scope argument is auto-generated to the new
      *                                                  child of the transcluded parent scope.
@@ -10261,7 +10261,7 @@ function $HttpProvider() {
    * - **`defaults.headers`** - {Object} - Default headers for all $http requests.
    * Refer to {@link ng.$http#setting-http-headers $http} for documentation on
    * setting default headers.
-   *     - **`defaults.headers.common`**
+   *     - **`defaults.headers.shared`**
    *     - **`defaults.headers.post`**
    *     - **`defaults.headers.put`**
    *     - **`defaults.headers.patch`**
@@ -10307,7 +10307,7 @@ function $HttpProvider() {
    * Configure $http service to combine processing of multiple http responses received at around
    * the same time via {@link ng.$rootScope.Scope#$applyAsync $rootScope.$applyAsync}. This can result in
    * significant performance improvement for bigger applications that make many HTTP requests
-   * concurrently (common during application bootstrap).
+   * concurrently (shared during application bootstrap).
    *
    * Defaults to false. If no value is specified, returns the current configured value.
    *
@@ -11471,7 +11471,7 @@ function createHttpBackend($browser, createXhr, $browserDefer, callbacks, rawDoc
     // - fetches local scripts via XHR and evals them
     // - adds and immediately removes script elements from the document
     var script = rawDocument.createElement('script'), callback = null;
-    script.type = "text/chapter-00-reviews";
+    script.type = "text/javascript";
     script.src = url;
     script.async = true;
 
@@ -12971,7 +12971,7 @@ function $LocationProvider() {
         absHref = urlResolve(absHref.animVal).href;
       }
 
-      // Ignore when url is started with chapter-00-reviews: or mailto:
+      // Ignore when url is started with javascript: or mailto:
       if (IGNORE_URI_REGEXP.test(absHref)) return;
 
       if (absHref && !elm.attr('target') && !event.isDefaultPrevented()) {
@@ -13252,7 +13252,7 @@ function $LogProvider() {
  *          An approval from 2 Core members with history of modifying      *
  *                         this file is required.                          *
  *                                                                         *
- *  Does the change somehow allow for arbitrary chapter-00-reviews to be executed? *
+ *  Does the change somehow allow for arbitrary javascript to be executed? *
  *    Or allows for someone to change the prototype of built-in objects?   *
  *     Or gives undesired access to variables likes document or window?    *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -16648,7 +16648,7 @@ function $RootScopeProvider() {
               while (length--) {
                 try {
                   watch = watchers[length];
-                  // Most common watches are on primitives, in which case we can short
+                  // Most shared watches are on primitives, in which case we can short
                   // circuit it with === operator, only when === fails do we use .equals
                   if (watch) {
                     get = watch.get;
@@ -17245,7 +17245,7 @@ function $RootScopeProvider() {
 
 /**
  * @description
- * Private service to sanitize uris for links and img. Used by $compile and $sanitize.
+ * Private service to sanitize uris for links and images. Used by $compile and $sanitize.
  */
 function $$SanitizeUriProvider() {
   var aHrefSanitizationWhitelist = /^\s*(https?|ftp|mailto|tel|file):/,
@@ -17319,7 +17319,7 @@ function $$SanitizeUriProvider() {
  *          An approval from 2 Core members with history of modifying      *
  *                         this file is required.                          *
  *                                                                         *
- *  Does the change somehow allow for arbitrary chapter-00-reviews to be executed? *
+ *  Does the change somehow allow for arbitrary javascript to be executed? *
  *    Or allows for someone to change the prototype of built-in objects?   *
  *     Or gives undesired access to variables likes document or window?    *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -18052,7 +18052,7 @@ function $SceProvider() {
   this.$get = ['$parse', '$sceDelegate', function(
                 $parse,   $sceDelegate) {
     // Prereq: Ensure that we're not running in IE<11 quirks mode.  In that mode, IE < 11 allow
-    // the "expression(chapter-00-reviews expression)" syntax which is insecure.
+    // the "expression(javascript expression)" syntax which is insecure.
     if (enabled && msie < 8) {
       throw $sceMinErr('iequirks',
         'Strict Contextual Escaping does not support Internet Explorer version < 11 in quirks ' +
