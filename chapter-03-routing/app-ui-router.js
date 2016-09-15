@@ -18,9 +18,8 @@ var app = angular.module('aptech', [
     'ui.router',
 ]);
 
-function config($stateProvider, $urlRouterProvider) {
+function config($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise("/home");
-
     $stateProvider
         .state('home', {
             url: '/home',
@@ -29,7 +28,7 @@ function config($stateProvider, $urlRouterProvider) {
             data: { pageTitle: 'HOME' }
         })
         .state('about', {
-            url: '/about',
+            url: '/about?name',
             templateUrl: 'views/about.html',
             controller: 'AboutController as about',
             data: { pageTitle: 'ABOUT' }
@@ -40,6 +39,8 @@ function config($stateProvider, $urlRouterProvider) {
             controller: 'JsonController as json',
             data: { pageTitle: 'JSON' }
         });
+
+    //$locationProvider.html5Mode(true);
 }
 
 app.config(config);
