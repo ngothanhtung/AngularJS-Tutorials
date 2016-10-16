@@ -15531,7 +15531,7 @@ function qFactory(nextTick, exceptionHandler) {
     }
   });
 
-  //Faster, more chapter-99-others than angular.bind http://jsperf.com/angular-bind-vs-custom-vs-native
+  //Faster, more basic than angular.bind http://jsperf.com/angular-bind-vs-custom-vs-native
   function simpleBind(context, fn) {
     return function(value) {
       fn.call(context, value);
@@ -20493,7 +20493,7 @@ function orderByFilter($parse) {
       value = value.toString();
       if (isPrimitive(value)) return value;
     }
-    // We have a chapter-99-others object so we use the position of the object in the collection
+    // We have a basic object so we use the position of the object in the collection
     return index;
   }
 
