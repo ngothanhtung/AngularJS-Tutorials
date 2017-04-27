@@ -43,7 +43,7 @@
 
         $stateProvider
                 .state('album1', {
-                    url: '/album1',
+                    url: '/album1/:name',
                     templateUrl: 'views/album1.html',
                     controller: 'Album1Controller',
                     data: {pageTitle: 'TÂM HỒN CỦA ĐÁ'}
@@ -76,7 +76,9 @@
         };
     });
 
-    app.controller("Album1Controller", function () {
+    app.controller("Album1Controller", function ($stateParams) {
+        this.name = $stateParams.name;
+        console.log(this.name);
         // Khởi tạo mảng các bài hát
         var songs = [];
         songs.push({name: 'Đường đến ngày vinh quang', file: 'audio/duong-den-ngay-vinh-quang.mp3'});
