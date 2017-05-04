@@ -1,0 +1,16 @@
+<div>
+    <h1>{{home.subTitle}}</h1>
+</div>
+<div class="row">
+    <div ng-repeat="s in songs" class="col-md-3">
+        <div style="margin-bottom: 40px;">
+            <a ui-sref="detail({id: s.id})">
+                <img ng-src="{{ s.imgSrc }}" style="width: 100%;" class="img img-responsive"/>
+            </a>
+            <p>
+            <h4 class="text-center">{{ s.name }}</h4>
+            <p class="text-center">{{ s.artist }}</p>
+            </p>
+        </div>
+    </div>
+</div>

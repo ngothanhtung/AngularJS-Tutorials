@@ -1,0 +1,17 @@
+<div>
+    <h1>{{ detail.subTitle }}</h1>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <img ng-src="{{ selectedSong.imgSrc }}" style="width: 100%;" class="img img-responsive"/>
+    </div>
+    <div class="col-md-8">
+        <h4 class="">{{ selectedSong.name }}</h4>
+        <p class="">{{ selectedSong.artist }}</p>
+        <p>
+            <a class="btn btn-primary" ng-click="play(selectedSong)" href="#" onclick="return false;">
+                Play
+            </a>
+        </p>
+    </div>
+</div>

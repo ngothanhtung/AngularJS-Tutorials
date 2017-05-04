@@ -1,0 +1,106 @@
+<!-- Ngô Thanh Tùng - Lecture of Softech Aptech -->
+
+<!DOCTYPE html>
+<html lang="en" ng-app="appMusic">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Music</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body ng-controller="MainController as main">
+
+<div class="container-fluid">
+
+    <div ng-include="'views/shared/header.html'"></div>
+
+    <!-- Main view  -->
+    <div ui-view>
+
+
+    </div>
+
+    <!-- Footer -->
+
+    <div ng-include="'views/shared/footer.html'"></div>
+
+</div>
+
+<script src="js/jquery-2.2.2.js"></script>
+
+<script src="js/angular/angular.js"></script>
+<script src="js/ui-router/angular-ui-router.js"></script>
+<script src="js/songs.js"></script>
+
+<script>
+    var app = angular.module('appMusic', [
+        'ui.router',
+    ]);
+
+
+    // Khai báo các view
+    function config($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise("/album1");
+
+        $stateProvider
+                .state('album1', {
+                    url: '/album1/:name',
+                    templateUrl: 'views/album1.html',
+                    controller: 'Album1Controller',
+                    data: {pageTitle: 'TÂM HỒN CỦA ĐÁ'}
+                })
+                .state('album2', {
+                    url: '/album2',
+                    templateUrl: 'views/album2.html',
+                    controller: 'Album2Controller',
+                    data: {pageTitle: 'NGÀY HÔM QUA'}
+                }).state('album3', {
+                    url: '/album3',
+                    templateUrl: 'views/album3.html',
+                    controller: 'Album3Controller',
+                    data: {pageTitle: 'NEW ALBUM'}
+                });
+    }
+
+    app.config(config);
+
+
+    app.controller("MainController", function ($scope) {
+        $scope.play = function(data) {
+
+            $scope.selectedSong = data;
+
+            var player = $("#music-player")[0];
+            player.src = data.file;
+            player.play();
+
+        };
+    });
+
+    app.controller("Album1Controller", function ($stateParams) {
+        this.name = $stateParams.name;
+        console.log(this.name);
+        // Khởi tạo mảng các bài hát
+        var songs = [];
+        songs.push({name: 'Đường đến ngày vinh quang', file: 'audio/duong-den-ngay-vinh-quang.mp3'});
+        songs.push({name: 'Bông hồng thủy tinh', file: 'audio/bong-hong-thuy-tinh.mp3'});
+        songs.push({name: 'Tâm hồn của đá', file: 'audio/tam-hon-cua-da.mp3'});
+
+        this.songs = songs;
+    });
+
+    app.controller("Album2Controller", function () {
+        // Khởi tạo mảng các bài hát
+        var songs = [];
+        songs.push({name: 'Ngày hôm qua', file: 'audio/ngay-hom-qua.mp3'});
+        songs.push({name: 'Giọt đắng', file: 'audio/giot-dang.mp3'});
+        songs.push({name: 'Hoa ban trắng', file: 'audio/hoa-ban-trang.mp3'});
+
+        this.songs = songs;
+    });
+
+
+    localStorage["name"] = "TUNG";
+</script>
+
+</body>
+</html>

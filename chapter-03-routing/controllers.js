@@ -22,16 +22,18 @@ function MainController($scope) {
 
 function HomeController() {
     this.subTitle = "This is home";
+    console.log( this.subTitle);
 }
 
 function AboutController() {
     this.subTitle = "This is about"
+    console.log( this.subTitle);
 }
 
 function JsonController($http, $scope) {
     $scope.$emit("load");
     $http
-        .get("http://ezlearning.edu.vn/OnlineEducation/api/OnlineEducationApi/GetReadingBooks?level=A")
+        .get("https://ames.edu.vn/OnlineEducation/api/OnlineEducationApi/GetReadingBooks?level=A")
         .then(function (response) {
             $scope.books = response.data;
             $scope.$emit("unload");

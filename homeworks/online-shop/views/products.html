@@ -1,0 +1,10 @@
+<h4>Products</h4>
+<div style="margin-top: 20px">
+    <div ng-controller="ProductsController as controller">
+        <ul class="list-group">
+            <li ng-repeat="p in controller.products" class="list-group-item">
+                {{ p.name }}
+            </li>
+        </ul>
+    </div>
+</div>

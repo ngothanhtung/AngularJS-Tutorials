@@ -22,9 +22,9 @@
     var app = angular.module('myApp', []);
     app.controller('myController', function ($scope, $http) {
         $http.get("http://localhost/mysql/get.php")
-                .then(function (response) {
-                    $scope.products = response.data.products;
-                });
+            .then(function (response) {
+                $scope.products = response.data.products;
+            });
     });
 </script>
 </body>

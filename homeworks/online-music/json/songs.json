@@ -1,0 +1,93 @@
+[
+  {
+    "id": 1,
+    "imgSrc": "images/tran-lap.jpg",
+    "name": "Đường đến ngày vinh quang",
+    "artist": "Trần Lập",
+    "mp3Url": "audio/duong-den-ngay-vinh-quang.mp3"
+  },
+  {
+    "id": 2,
+    "imgSrc": "images/tran-lap.jpg",
+    "name": "Bông Hồng Thuỷ Tinh",
+    "artist": "Trần Lập",
+    "mp3Url": "audio/bong-hong-thuy-tinh.mp3"
+  },
+  {
+    "id": 3,
+    "imgSrc": "images/tran-lap.jpg",
+    "name": "Giọt đắng",
+    "artist": "Trần Lập",
+    "mp3Url": "audio/giot-dang.mp3"
+  },
+  {
+    "id": 4,
+    "imgSrc": "images/tran-lap.jpg",
+    "name": "Tâm hồn của đá",
+    "artist": "Trần Lập",
+    "mp3Url": "audio/tam-hon-cua-da.mp3"
+  },
+  {
+    "id": 5,
+    "imgSrc": "images/tran-lap.jpg",
+    "name": "Hoa bang trắng",
+    "artist": "Trần Lập",
+    "mp3Url": "audio/hoa-ban-trang.mp3"
+  },
+  {
+    "id": 6,
+    "imgSrc": "images/6.jpg",
+    "name": "Nhạc Hoa lời Việt",
+    "artist": "Nhiều ca sĩ",
+    "mp3Url": ""
+  },
+  {
+    "id": 7,
+    "imgSrc": "images/7.jpg",
+    "name": "Một lần sau cuối",
+    "artist": "Nguyễn Kiều Anh",
+    "mp3Url": ""
+  },
+  {
+    "id": 8,
+    "imgSrc": "images/8.jpg",
+    "name": "Nhạc Hot US-UK",
+    "artist": "Nhiều ca sĩ",
+    "mp3Url": ""
+  },
+  {
+    "id": 9,
+    "imgSrc": "images/9.jpg",
+    "name": "Shape of You",
+    "artist": "Ed Sheeran",
+    "mp3Url": ""
+  },
+  {
+    "id": 10,
+    "imgSrc": "images/10.jpg",
+    "name": "K.A.R.D Project Vol.2",
+    "artist": "K.A.R.D",
+    "mp3Url": ""
+  },
+  {
+    "id": 11,
+    "imgSrc": "images/11.jpg",
+    "name": "Tình ca năm 2000",
+    "artist": "Đan Trường",
+    "mp3Url": ""
+  },
+  {
+    "id": 12,
+    "imgSrc": "images/12.jpg",
+    "name": "Old Style Love Songs",
+    "artist": "Nhiều ca ",
+    "mp3Url": ""
+  },
+  {
+    "id": 13,
+    "imgSrc": "images/12.jpg",
+    "name": "Old Style Love Songs",
+    "artist": "Muoi ba",
+    "mp3Url": ""
+  }
+]
